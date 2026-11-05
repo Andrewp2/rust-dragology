@@ -187,6 +187,20 @@ impl Example for Nested {
         for root in &s.roots {
             draw(&mut scene, root, root.position, None);
         }
+        if !self.0 {
+            // Each row and slot adds a zero to the source's stacking path.
+            // Deeper ID layers therefore paint above all shallower layers;
+            // the vanilla comparison instead keeps ordinary subtree order.
+            let mut depths = std::collections::HashMap::new();
+            for object in &scene.objects {
+                let depth = object
+                    .parent
+                    .as_ref()
+                    .map_or(0, |parent| depths[parent] + 1);
+                depths.insert(object.id.clone(), depth);
+            }
+            scene.objects.sort_by_key(|object| depths[&object.id]);
+        }
         if self.0 {
             for o in &mut scene.objects {
                 if o.hit.is_some() {
@@ -334,6 +348,38 @@ impl Example for Nested {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn declarative_nesting_keeps_tiles_above_overlapping_root_backgrounds() {
+        let mut app = crate::runtime::ModelDemo::new(Nested(false));
+        app.set_animated(false);
+        // Detach row2 so a gap between its tiles lies over A1. Root
+        // backgrounds remain below all tiles in the source's ID layers.
+        app.press(Point::new(28., 133.), Modifiers::default(), 1);
+        app.release(Point::new(-32., 13.), Modifiers::default());
+        let row = app.scene().object("row2").unwrap().transform;
+        assert!((row * Point::ORIGIN).distance(Point::new(-40., -20.)) < 0.01);
+        app.press(Point::new(40., 20.), Modifiers::default(), 1);
+        app.release(Point::new(550., 350.), Modifiers::default());
+        assert_eq!(app.scene().object("row2").unwrap().transform, row);
+        assert!(
+            (app.scene().object("A1").unwrap().transform * Point::ORIGIN).x > 400.,
+            "a tile must remain reachable above an overlapping root background"
+        );
+    }
+    #[test]
+    fn declarative_and_vanilla_nesting_preserve_their_distinct_stacking_rules() {
+        for vanilla in [false, true] {
+            let example = Nested(vanilla);
+            let mut state = example.initial();
+            state.roots[1].position = Point::new(180., 0.);
+            let scene = example.scene(&state);
+            let deep = scene.objects.iter().position(|o| o.id == "A1-1").unwrap();
+            let shallow = scene.objects.iter().position(|o| o.id == "A2").unwrap();
+            // The overlapping deeper tile rises above a later root's tiles
+            // only in the declarative renderer. Vanilla retains DOM order.
+            assert_eq!(deep > shallow, !vanilla);
+        }
+    }
     #[test]
     fn vanilla_target_scores_the_full_height_of_the_insertion_line() {
         let example = Nested(true);

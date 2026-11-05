@@ -297,17 +297,22 @@ fn link(s: &ProofState, src: &Loc, dst: &Loc) -> Option<ProofState> {
         return None;
     }
     let g = &s.goals[src.row];
-    let (hi, result) = if src.hyp.is_none() || dst.hyp.is_none() {
+    let (hi, result, drop_path) = if src.hyp.is_none() || dst.hyp.is_none() {
         let (h, c) = if src.hyp.is_none() {
             (dst, src)
         } else {
             (src, dst)
         };
-        (None, back(&g.hyps[h.hyp?], &h.path, &g.goal, &c.path)?)
+        (
+            None,
+            back(&g.hyps[h.hyp?], &h.path, &g.goal, &c.path)?,
+            &c.path,
+        )
     } else {
         (
             dst.hyp,
             fwd(&g.hyps[src.hyp?], &src.path, &g.hyps[dst.hyp?], &dst.path)?,
+            &dst.path,
         )
     };
     let mut seen = BTreeSet::new();
@@ -322,6 +327,19 @@ fn link(s: &ProofState, src: &Loc, dst: &Loc) -> Option<ProofState> {
     }
     let mut n = s.clone();
     let result = freshen(&simplify(&result), &mut seen, &mut n.emerge);
+    let replaced = hi.map_or(&g.goal, |i| &g.hyps[i]);
+    let origin = (0..=drop_path.len())
+        .rev()
+        .map(|len| at(replaced, &drop_path[..len]))
+        .find(|ancestor| result.find(&ancestor.id).is_some())
+        .map_or(&g.id, |ancestor| &ancestor.id);
+    for node in result.nodes() {
+        if replaced.find(&node.id).is_none() && node.emerge.is_none() {
+            n.emerge
+                .entry(node.id.clone())
+                .or_insert_with(|| origin.clone());
+        }
+    }
     let result_id = result.id.clone();
     let mut ng = g.clone();
     if let Some(i) = hi {
@@ -1054,6 +1072,45 @@ mod tests {
                 }
             }
         }
+    }
+    #[test]
+    fn link_connectives_emerge_from_the_surviving_drop_ancestor() {
+        let mut s = initial(0);
+        s.goals[0].hyps = vec![parse("(p -> q) | r")];
+        let old_goal = s.goals[0].goal.clone();
+        let hyp = &s.goals[0].hyps[0];
+        let source = Loc {
+            row: 0,
+            hyp: None,
+            path: vec![],
+        };
+        let target = Loc {
+            row: 0,
+            hyp: Some(0),
+            path: vec![0, 1],
+        };
+        let next = link(&s, &source, &target).unwrap();
+        let result = &next.goals[0].goal;
+        assert!(result.structural_eq(&parse("p & (r -> q)")));
+        let scene = Proof.scene(&next);
+        for connective in [result, &result.children[1]] {
+            assert_eq!(
+                scene.object(&connective.id).unwrap().emerge_from.as_deref(),
+                Some(old_goal.id.as_str()),
+            );
+        }
+        // Copied hypotheses still emerge from their own original nodes.
+        for (copy, original) in [
+            (&result.children[0], &hyp.children[0].children[0]),
+            (&result.children[1].children[0], &hyp.children[1]),
+        ] {
+            assert_ne!(copy.id, original.id);
+            assert_eq!(
+                scene.object(&copy.id).unwrap().emerge_from.as_deref(),
+                Some(original.id.as_str()),
+            );
+        }
+        assert_eq!(result.children[1].children[1].id, old_goal.id);
     }
     #[test]
     fn modus_ponens_two_links_close_goal() {

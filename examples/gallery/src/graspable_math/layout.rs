@@ -478,6 +478,12 @@ pub fn render_interaction(s: &State, dragged: Option<&str>, hovered: Option<&str
     );
     emit(&mut layout, rhs, 338.7, 128., None, hovered);
     if let Some(puff) = &s.puff {
+        let lead = puff.sign.map_or((String::new(), 0.), |sign| {
+            (
+                (if sign < 0 { "−" } else { "+" }).into(),
+                0.68 * 34. * puff.size,
+            )
+        });
         let inner = build(
             &puff.expr,
             Place {
@@ -489,19 +495,27 @@ pub fn render_interaction(s: &State, dragged: Option<&str>, hovered: Option<&str
             0,
             puff.expr.id,
             puff.size,
-            (String::new(), 0.),
+            lead,
         );
         let em = 34. * puff.size;
-        let center = Point::new(inner.w / 2., -0.3 * em);
+        let center = Point::new((inner.w - inner.lead) / 2., -0.3 * em);
+        let at = puff.at - Vec2::new(0., equation_buttons(&mut Scene::new(640., 240.), s.preset));
+        let hidden_start = layout.scene.objects.len();
+        let lead_width = inner.lead;
+        emit(&mut layout, inner, at.x - lead_width, at.y, None, None);
+        // Keep every part at its destination while it fades into the cloud.
+        // Dropping the hidden subtree would make its children fade at their old positions.
+        for object in &mut layout.scene.objects[hidden_start..] {
+            object.opacity = 0.;
+        }
+        let root_id = format!("node-{}", puff.expr.id);
         let mut cloud = Object::new(
-            format!("node-{}", puff.expr.id),
-            Affine::translate(
-                puff.at.to_vec2()
-                    - Vec2::new(0., equation_buttons(&mut Scene::new(640., 240.), s.preset)),
-            ),
+            format!("{root_id}-puff"),
+            Affine::translate(at.to_vec2()),
             None,
             Vec::new(),
         );
+        cloud.parent = Some(root_id);
         cloud.opacity = 0.75;
         let bumps = [
             (-0.2, 0.04, 0.16),

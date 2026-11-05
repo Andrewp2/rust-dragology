@@ -6,6 +6,8 @@ The gallery ports the presentation and interaction rules of [Dragology at commit
 
 Text uses SVG shaping through usvg and a shared system-font database. Glyph outlines follow the object's full affine transform, including rotation, shear and nonuniform scale. `TextStyle` represents source anchors, baselines, font family, weight, italic style, letter spacing and strikethrough. Text measurement and painting share `text_layout`, so measured wrapping and mixed-script labels use the same font advances as the drawing. An optional outline paints behind glyph fills for source text halos.
 
+Unresolvable generic font aliases fall back to installed families; valid system preferences are retained. This prevents missing glyphs and zero-width measurements on minimal Linux installations. As in SVG, rectangles with nonpositive dimensions do not paint, including when an elastic transition overshoots a shrinking bar.
+
 Strokes are outlined in local coordinates before transformation. This preserves scaling behavior, cap and join styles, miter limits, dash patterns and dash offsets. Non-scaling strokes transform the centerline first. Shapes support nonzero and even-odd fills, local rectangle/path clips, Gaussian blur and drop shadows. Shadows use visible ink: a transparent fill casts no shadow. Source blurred halos use a filled shape with blur.
 
 The painter rejects distant article content before shaping its visible glyphs. The stage caches unchanged scenes, but bypasses that cache in the same frame when the displayed scene changes. This keeps unrelated search edits from repainting a dense diagram without delaying drag feedback.
@@ -15,6 +17,8 @@ The painter rejects distant article content before shaping its visible glyphs. T
 Inline controls use source scene coordinates or the final transform of their parent object. Their identity persists while a parent floats or changes position. Styling includes foreground, background, border, font family, font size and placeholders. Inline text fields and sliders do not receive an extra caption.
 
 Buttons preserve enabled and selected states. Explicit `ControlPlacement.select()` placements use compact dropdowns for source HTML selects; open menus support Up, Down, Enter and Escape. Other choices can use grouped buttons. Read-only code panes have independent horizontal and vertical scrolling.
+
+Checkbox labels wrap within the options panel. Exact demo IDs rank before description matches in search, so entering `tiles`, `angle`, or another full ID opens that demo.
 
 Mouse movement and modifier changes record input; rendering advances the drag runtime on the animation clock. Pointer capture handles movement and release outside an object, and loss of the held button cancels the gesture. Source cursor overrides, hover tooltips, transparent hit targets and click-handler annotations pass through the shared API. The runtime uses click-handler annotations for the source click/drag threshold.
 

@@ -18,6 +18,7 @@ struct State {
 #[derive(Clone, Debug, PartialEq)]
 struct Puff {
     expr: Expr,
+    sign: Option<i8>,
     at: Point,
     size: f64,
 }
@@ -200,12 +201,14 @@ fn merge_target(
     bounds: &HashMap<u64, NodeBounds>,
     target: u64,
     dragged: &Expr,
+    sign: Option<i8>,
     merged: State,
 ) -> DragSpec<'static, State> {
     let b = bounds[&target];
     let mut preview = merged.clone();
     preview.puff = Some(Puff {
         expr: dragged.clone(),
+        sign,
         at: b.origin,
         size: bounds.get(&dragged.id).map_or(b.size, |d| d.size),
     });
@@ -362,6 +365,7 @@ fn spec(s: &State, role: &Role, bounds: &HashMap<u64, NodeBounds>) -> DragSpec<'
                         bounds,
                         u.expr.id,
                         &t.expr,
+                        Some(t.sign),
                         set_terms(s, owner, next),
                     ));
                 }
@@ -437,6 +441,7 @@ fn spec(s: &State, role: &Role, bounds: &HashMap<u64, NodeBounds>) -> DragSpec<'
                         bounds,
                         g.id,
                         f,
+                        None,
                         set_factors(s, owner, part, next),
                     ));
                 }
@@ -466,6 +471,7 @@ fn spec(s: &State, role: &Role, bounds: &HashMap<u64, NodeBounds>) -> DragSpec<'
                             bounds,
                             g.id,
                             f,
+                            None,
                             set_both(s, owner, top, mine, theirs),
                         ));
                     }
@@ -517,6 +523,7 @@ fn spec(s: &State, role: &Role, bounds: &HashMap<u64, NodeBounds>) -> DragSpec<'
                     bounds,
                     base.id,
                     exp,
+                    None,
                     s.replace(owner, worked),
                 ));
             }
@@ -560,7 +567,14 @@ fn spec(s: &State, role: &Role, bounds: &HashMap<u64, NodeBounds>) -> DragSpec<'
                 unreachable!()
             };
             if let Some(v) = eval_log(base, arg) {
-                targets.push(merge_target(s, bounds, arg.id, base, s.replace(owner, v)));
+                targets.push(merge_target(
+                    s,
+                    bounds,
+                    arg.id,
+                    base,
+                    None,
+                    s.replace(owner, v),
+                ));
             }
             if let Some(side) = across {
                 targets.push(fixed(s.side(side, (**arg).clone()).side(
@@ -646,13 +660,19 @@ mod tests {
         let mut preview = s.clone();
         preview.puff = Some(Puff {
             expr: dragged.clone(),
+            sign: Some(ts[1].sign),
             at: Point::new(100., 128.),
             size: 1.,
         });
         // A real merge removes the dragged expression from both equation sides.
         preview.sides[0] = ts[0].expr.clone();
         let sc = Math.scene_dragging(&preview, Some(&format!("node-{}", dragged.id)));
-        let cloud = sc.object(&format!("node-{}", dragged.id)).unwrap();
+        let root_id = format!("node-{}", dragged.id);
+        let root = sc.object(&root_id).unwrap();
+        assert_eq!(root.opacity, 0.);
+        assert!(root.hit.is_none());
+        let cloud = sc.object(&format!("{root_id}-puff")).unwrap();
+        assert_eq!(cloud.parent.as_deref(), Some(root_id.as_str()));
         assert_eq!(cloud.shapes.len(), 13); // Five outline/fill pairs and three wisps, upstream drawPoof.
         assert_eq!(cloud.opacity, 0.75);
         assert!(
@@ -660,6 +680,49 @@ mod tests {
                 .shapes
                 .iter()
                 .all(|shape| matches!(shape, Shape::Circle { .. }))
+        );
+    }
+    #[test]
+    fn compound_merge_preserves_hidden_children_at_the_puff_destination() {
+        let (lhs, rhs) = parse("2x + 3x = 10");
+        let state = State {
+            sides: [lhs, rhs],
+            preset: 0,
+            puff: None,
+        };
+        let ts = terms(&state.sides[0]);
+        let dragged = &ts[0].expr;
+        let before = render(&state);
+        let destination = before.bounds[&ts[1].expr.id].origin;
+        let mut preview = set_terms(&state, state.sides[0].id, combine(&ts[0], &ts[1]).unwrap());
+        preview.puff = Some(Puff {
+            expr: dragged.clone(),
+            sign: Some(ts[0].sign),
+            at: destination,
+            size: 1.,
+        });
+        let scene = Math.scene_dragging(&preview, Some(&format!("node-{}", dragged.id)));
+        let root_id = format!("node-{}", dragged.id);
+        let old_origin = before.bounds[&dragged.id].origin;
+        for child in factors(dragged) {
+            let object = scene.object(&format!("node-{}", child.id)).unwrap();
+            assert_eq!(object.parent.as_deref(), Some(root_id.as_str()));
+            assert_eq!(object.opacity, 0.);
+            assert!(object.hit.is_none());
+            assert_eq!(
+                object.transform * Point::ORIGIN,
+                destination + (before.bounds[&child.id].origin - old_origin),
+            );
+        }
+        assert!(scene.object(&format!("{root_id}-puff")).is_some());
+        assert_eq!(
+            scene
+                .objects
+                .iter()
+                .map(|o| &o.id)
+                .collect::<std::collections::BTreeSet<_>>()
+                .len(),
+            scene.objects.len(),
         );
     }
     #[test]

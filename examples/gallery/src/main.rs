@@ -31,6 +31,23 @@ fn modifiers(m: gpui::Modifiers) -> Modifiers {
     }
 }
 
+fn matching_entries<'a>(entries: &'a [Entry], query: &'a str) -> impl Iterator<Item = usize> + 'a {
+    let exact = entries.iter().position(|entry| entry.id == query);
+    exact.into_iter().chain(
+        entries
+            .iter()
+            .enumerate()
+            .filter_map(move |(index, entry)| {
+                (Some(index) != exact
+                    && (query.is_empty()
+                        || entry.id.contains(query)
+                        || entry.title.to_lowercase().contains(query)
+                        || entry.description.to_lowercase().contains(query)))
+                .then_some(index)
+            }),
+    )
+}
+
 fn button(
     id: impl Into<gpui::ElementId>,
     label: impl Into<SharedString>,
@@ -197,16 +214,7 @@ impl Gallery {
     }
 
     fn matches(&self) -> impl Iterator<Item = usize> + '_ {
-        self.entries
-            .iter()
-            .enumerate()
-            .filter_map(|(index, entry)| {
-                (self.query.is_empty()
-                    || entry.id.contains(&self.query)
-                    || entry.title.to_lowercase().contains(&self.query)
-                    || entry.description.to_lowercase().contains(&self.query))
-                .then_some(index)
-            })
+        matching_entries(&self.entries, &self.query)
     }
 
     fn select(&mut self, index: usize, cx: &mut Context<Self>) {
@@ -474,7 +482,14 @@ impl Gallery {
                         .border_color(rgb(0x8b999b))
                         .bg(rgb(if value { 0x466c71 } else { 0xffffff })),
                 )
-                .child(div().when(!inline, |view| view.text_sm()).child(label))
+                .child(
+                    div()
+                        .flex_1()
+                        .min_w_0()
+                        .whitespace_normal()
+                        .when(!inline, |view| view.text_sm())
+                        .child(label),
+                )
                 .into_any_element(),
             Control::Choice {
                 id,
@@ -743,6 +758,20 @@ impl Gallery {
         }
         inline.sort_by_key(|(placement, _)| Some(placement.id) == self.choice_open);
         (options, inline)
+    }
+}
+
+#[cfg(test)]
+mod search_tests {
+    use super::*;
+
+    #[test]
+    fn searching_a_demo_id_opens_that_demo_before_description_matches() {
+        let entries = dragology_gallery::entries();
+        for entry in &entries {
+            let index = matching_entries(&entries, entry.id).next().unwrap();
+            assert_eq!(entries[index].id, entry.id);
+        }
     }
 }
 

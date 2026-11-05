@@ -387,7 +387,9 @@ fn render(
                 scene.push(handle(format!("{}:gap", n.id), p, tick, color, 2.));
             }
             if *direction == 2 && children.len() > 1 {
-                let p = Point::new(x + g.w - pad + 6., y + pad + g.rows[0] / 2.);
+                let content_width =
+                    g.cols.iter().sum::<f64>() + gap * g.cols.len().saturating_sub(1) as f64;
+                let p = Point::new(x + pad + content_width + 6., y + pad + g.rows[0] / 2.);
                 let mut o = Object::circle(format!("{}:cols", n.id), p, 3.5, WHITE);
                 o.hit = Some(Hit::Rect(Rect::new(-5., -5., 5., 5.)));
                 if let Shape::Circle { stroke, .. } = &mut o.shapes[0] {
@@ -765,6 +767,33 @@ impl Example for Layout {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn compact_grid_column_handle_can_change_columns_below_minimum_box_width() {
+        let mut root = container(
+            "root",
+            2,
+            0.,
+            0.,
+            vec![leaf("a", 20., 20., BLUE), leaf("b", 20., 20., RED)],
+        );
+        if let Kind::Box { cols, .. } = &mut root.kind {
+            *cols = 1;
+        }
+        let state = State { root };
+        let id = "root:cols";
+        let start = Layout.locate(&state, id).unwrap() * Point::ORIGIN;
+        // Upstream places this handle six pixels past the first row's content,
+        // even when the enclosing box is widened by its 44-pixel minimum.
+        let two_columns = Point::new(20. + 20. + 20. + 6., 40. + 10.);
+        let spec = Layout.drag(&state, id, Modifiers::default()).unwrap();
+        let session =
+            dragology::DragSession::begin(state, start, |s| Layout.locate(s, id), spec).unwrap();
+        let next = session.finish(two_columns).unwrap();
+        let Kind::Box { cols, .. } = next.root.kind else {
+            unreachable!()
+        };
+        assert_eq!(cols, 2);
+    }
     #[test]
     fn moving_preserves_tree_and_blocks_cycles() {
         let s = Layout.initial();

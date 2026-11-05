@@ -724,21 +724,23 @@ fn finish(s: &State) -> State {
     tidy(&mut t.model);
     t
 }
-fn validate(m: &Model) -> Result<(), String> {
-    if !m.duration.is_finite() || m.duration <= 0. || !m.cursor.is_finite() {
-        return Err("Duration must be positive and cursor finite.".into());
-    }
+fn validate_parameter_ranges(m: &Model) -> Result<(), String> {
     for (id, p) in &m.params {
         if !p.value.is_finite() || !p.min.is_finite() || !p.max.is_finite() || p.min > p.max {
             return Err(format!("Parameter {id} has an invalid range."));
         }
     }
+    Ok(())
+}
+fn validate(m: &Model) -> Result<(), String> {
+    if !m.duration.is_finite() || m.duration <= 0. || !m.cursor.is_finite() {
+        return Err("Duration must be positive and cursor finite.".into());
+    }
+    validate_parameter_ranges(m)?;
     let param = |id: &str| m.params.contains_key(id);
     for (id, s) in &m.stocks {
         if !param(&s.init)
-            || s.volume
-                .as_ref()
-                .is_some_and(|p| !param(p) || m.params[p].value <= 0.)
+            || s.volume.as_ref().is_some_and(|p| !param(p))
             || !s.x.is_finite()
             || !s.y.is_finite()
         {
@@ -2819,6 +2821,9 @@ impl Example for StockFlow {
             object.insert("sweep".into(), serde_json::Value::Null);
         }
         let mut model: Model = serde_json::from_value(json).map_err(|e| e.to_string())?;
+        // Cleanup clamps values into their ranges, so reject reversed bounds
+        // before it can panic. Keep reference validation after orphan cleanup.
+        validate_parameter_ranges(&model)?;
         tidy(&mut model);
         validate(&model)?;
         fit_model(&mut model);
@@ -2842,6 +2847,44 @@ impl Example for StockFlow {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn loading_reversed_parameter_range_returns_an_error() {
+        let state = StockFlow.initial();
+        let mut json = serde_json::to_value(&state.model).unwrap();
+        let pid = &state.model.stocks.values().next().unwrap().init;
+        json["params"][pid]["min"] = serde_json::json!(2.);
+        json["params"][pid]["max"] = serde_json::json!(1.);
+        assert!(StockFlow.import(&state, &json.to_string()).is_err());
+    }
+    #[test]
+    fn exact_volume_edits_round_trip_through_save_and_load() {
+        let state = StockFlow.initial();
+        let pid = state
+            .model
+            .stocks
+            .values()
+            .find_map(|stock| stock.volume.clone())
+            .unwrap();
+        for value in ["0", "-1"] {
+            let editing = StockFlow
+                .click(
+                    &state,
+                    &format!("parameter-value-{pid}"),
+                    Point::ORIGIN,
+                    Modifiers::default(),
+                    2,
+                )
+                .unwrap();
+            let edited = StockFlow
+                .action(&editing, "parameter-value", Value::Text(value.into()))
+                .unwrap();
+            let (_, saved) = StockFlow.export(&edited).unwrap();
+            let loaded = StockFlow
+                .import(&state, &saved)
+                .unwrap_or_else(|error| panic!("volume {value} could not be reloaded: {error}"));
+            assert!(loaded.model == edited.model);
+        }
+    }
     #[test]
     fn native_endpoints_exclude_self_and_palette_trash_cancels_creation() {
         let mut app = demo(StockFlow);

@@ -495,6 +495,9 @@ impl Example for Rows {
             }
             next_y += if self.plain() { 60. } else { height + 10. };
         }
+        // Source ID layers place every row background [0] below every tile
+        // [0, 1], including tiles belonging to earlier, overlapping rows.
+        scene.objects.sort_by_key(|object| object.parent.is_some());
         scene
     }
     fn scene_dragging(&self, state: &RowsState, id: Option<&str>) -> Scene {
@@ -1114,6 +1117,24 @@ mod tests {
         assert_eq!(out.rows.len(), 4);
         assert_eq!(tile_ids(&s), tile_ids(&out));
         assert_eq!(out.rows.last().unwrap().items[0].id, "A1");
+    }
+    #[test]
+    fn overlapping_canvas_rows_keep_tiles_above_other_row_backgrounds() {
+        let mut app = crate::runtime::ModelDemo::new(Rows(Mode::Canvas));
+        app.set_animated(false);
+        // Move row2 so its grip lies over A1. Upstream's row layer [0]
+        // remains beneath A1's tile layer [0, 1] after the row is released.
+        app.press(Point::new(28., 133.), Modifiers::default(), 1);
+        app.release(Point::new(48., 33.), Modifiers::default());
+        let row = app.scene().object("row2").unwrap().transform;
+        assert!((row * Point::ORIGIN).distance(Point::new(40., 0.)) < 0.01);
+        app.press(Point::new(50., 25.), Modifiers::default(), 1);
+        app.release(Point::new(550., 350.), Modifiers::default());
+        assert_eq!(app.scene().object("row2").unwrap().transform, row);
+        assert!(
+            (app.scene().object("A1").unwrap().transform * Point::ORIGIN).x > 400.,
+            "the visible tile must receive the drag instead of the overlapping row"
+        );
     }
     #[test]
     fn palette_creation_replenishes_stock_and_far_release_cancels() {

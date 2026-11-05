@@ -143,19 +143,25 @@ impl Example for Tiles {
         let mut scene = Scene::new(300., 300.);
         grid(&mut scene, 5, 5, 50., 0.);
         for (i, &(x, y)) in s.positions.iter().enumerate() {
-            scene.push(centered_label(
-                source_rect(
-                    format!("tile-{i}"),
-                    Rect::from_origin_size((f64::from(x) * 50., f64::from(y) * 50.), (50., 50.)),
-                    0.,
-                    rgb(0xeeeeee),
-                    Some((BLACK, 2.)),
-                ),
-                ((b'A' + i as u8) as char).to_string(),
-                Point::new(25., 25.),
-                20.,
-                BLACK,
-            ));
+            scene.push(
+                centered_label(
+                    source_rect(
+                        format!("tile-{i}"),
+                        Rect::from_origin_size(
+                            (f64::from(x) * 50., f64::from(y) * 50.),
+                            (50., 50.),
+                        ),
+                        0.,
+                        rgb(0xeeeeee),
+                        Some((BLACK, 2.)),
+                    ),
+                    ((b'A' + i as u8) as char).to_string(),
+                    Point::new(25., 25.),
+                    20.,
+                    BLACK,
+                )
+                .text_baseline(TextBaseline::Middle),
+            );
         }
         scene
     }
@@ -577,7 +583,8 @@ impl Example for Hanoi {
                 14.,
                 BLACK,
             )
-            .font_weight(700);
+            .font_weight(700)
+            .text_baseline(TextBaseline::Middle);
 
             scene.push(object);
         }
@@ -840,24 +847,27 @@ impl Example for Spinny {
                     center: Point::ORIGIN,
                 },
             ];
-            scene.push(centered_label(
-                Object::new(
-                    format!("letter-{i}"),
-                    Affine::IDENTITY,
-                    Some(Hit::Circle(Point::ORIGIN, 25.)),
-                    vec![Shape::Circle {
-                        center: Point::ORIGIN,
-                        radius: 25.,
-                        fill: WHITE,
-                        stroke: Some((BLACK, 2.)),
-                    }],
+            scene.push(
+                centered_label(
+                    Object::new(
+                        format!("letter-{i}"),
+                        Affine::IDENTITY,
+                        Some(Hit::Circle(Point::ORIGIN, 25.)),
+                        vec![Shape::Circle {
+                            center: Point::ORIGIN,
+                            radius: 25.,
+                            fill: WHITE,
+                            stroke: Some((BLACK, 2.)),
+                        }],
+                    )
+                    .transforms(components),
+                    ((b'A' + i as u8) as char).to_string(),
+                    Point::ORIGIN,
+                    14.,
+                    BLACK,
                 )
-                .transforms(components),
-                ((b'A' + i as u8) as char).to_string(),
-                Point::ORIGIN,
-                14.,
-                BLACK,
-            ));
+                .text_baseline(TextBaseline::Middle),
+            );
         }
         scene
     }
@@ -873,10 +883,10 @@ impl Example for Spinny {
                 s,
                 vec![
                     SpinState {
-                        offset: s.offset - 1,
+                        offset: s.offset + 1,
                     },
                     SpinState {
-                        offset: s.offset + 1,
+                        offset: s.offset - 1,
                     },
                 ],
             )
@@ -1258,6 +1268,24 @@ mod tests {
                 );
             }
         }
+    }
+    #[test]
+    fn spinny_ambiguous_drags_prefer_the_source_first_branch() {
+        let state = Spinny.initial();
+        let start = Spinny.locate(&state, "letter-0").unwrap() * Point::ORIGIN;
+        let session = dragology::DragSession::begin(
+            state.clone(),
+            start,
+            |s| Spinny.locate(s, "letter-0"),
+            Spinny
+                .drag(&state, "letter-0", Modifiers::default())
+                .unwrap(),
+        )
+        .unwrap();
+        // Opposite the grabbed circle, both quarter turns are equally close.
+        // Upstream offers moving the first permutation item to the end first.
+        let drop = session.finish(Point::new(1000., 130.)).unwrap();
+        assert_eq!(drop.offset, 1);
     }
     #[test]
     fn fifteen_moves_exchange_the_gap_with_an_orthogonal_neighbor() {

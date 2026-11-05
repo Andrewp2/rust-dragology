@@ -283,6 +283,9 @@ impl Example for Gears {
         propagate_absolute(GearState { gears }, 0)
     }
     fn scene(&self, s: &GearState) -> Scene {
+        self.scene_dragging(s, None)
+    }
+    fn scene_dragging(&self, s: &GearState, dragged: Option<&str>) -> Scene {
         let mut scene = Scene::new(500., 360.);
         for (i, g) in s.gears.iter().enumerate() {
             let radius = gear_radius(g);
@@ -342,6 +345,17 @@ impl Example for Gears {
                 .transforms(components),
             );
         }
+        // Source hubs have absolute z-index /1 (and /2 while dragged), so
+        // their move targets remain reachable when another gear overlaps.
+        scene.objects.sort_by_key(|object| {
+            if !object.id.starts_with("hub-") {
+                0
+            } else if dragged == Some(object.id.as_str()) {
+                2
+            } else {
+                1
+            }
+        });
         source_cursors(scene)
     }
     fn locate(&self, s: &GearState, id: &str) -> Option<Affine> {
@@ -577,6 +591,34 @@ impl Example for Scheduler {
 mod tests {
     use super::*;
     #[test]
+    fn overlapped_gear_hub_can_be_regrabbed_to_move() {
+        let initial = Gears.initial();
+        let target = initial.gears[4].center + Vec2::new(-15., 0.);
+        let mut demo = demo(Gears);
+        demo.set_animated(false);
+        let modifiers = Modifiers::default();
+        demo.press(initial.gears[0].center, modifiers, 1);
+        demo.release(target, modifiers);
+        let center = demo.scene().object("hub-0").unwrap().transform * Point::ORIGIN;
+        assert!(
+            center.distance(target) < 0.01,
+            "first move: {center:?}, target {target:?}, {}",
+            demo.status()
+        );
+
+        // The hub is now beneath the last gear's painted body, outside its
+        // own hub. Pressing here must still move the first gear, not spin it.
+        let destination = target + Vec2::new(0., 150.);
+        demo.press(center, modifiers, 1);
+        demo.release(destination, modifiers);
+        let center = demo.scene().object("hub-0").unwrap().transform * Point::ORIGIN;
+        assert!(
+            center.distance(destination) < 0.01,
+            "hub stopped at {center:?}"
+        );
+    }
+
+    #[test]
     fn chain_lengths_survive_coincident_and_displaced_links() {
         for anchor in 0..10 {
             let mut state = Chain.initial();
@@ -590,6 +632,33 @@ mod tests {
                 assert!((pair[0].distance(pair[1]) - 40.).abs() < 1e-9);
             }
         }
+    }
+    #[test]
+    fn chain_modes_preserve_history_only_when_chaining_is_enabled() {
+        let initial = Chain.initial();
+        let anchor = initial.points[4];
+        let modes: Vec<_> = (0..3)
+            .map(|mode| {
+                let mut demo = demo(Chain);
+                demo.set_animated(false);
+                demo.action("mode", Value::Index(mode));
+                let modifiers = Modifiers::default();
+                demo.press(anchor, modifiers, 1);
+                for target in [anchor + Vec2::new(0., 100.), anchor] {
+                    demo.move_to(target, modifiers);
+                    demo.advance(std::time::Duration::ZERO);
+                }
+                demo.release(anchor, modifiers);
+                std::array::from_fn::<_, 10, _>(|i| {
+                    demo.scene().object(&format!("dot-{i}")).unwrap().transform * Point::ORIGIN
+                })
+            })
+            .collect();
+        for i in 0..10 {
+            assert!(modes[0][i].distance(modes[1][i]) < 0.01);
+            assert!(modes[2][i].distance(initial.points[i]) < 0.01);
+        }
+        assert!(modes[0][0].distance(initial.points[0]) > 10.);
     }
     #[test]
     fn meshed_gears_preserve_tooth_phase_and_ratio() {

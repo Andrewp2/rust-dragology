@@ -160,14 +160,21 @@ fn object_ink(object: &Object, transform: Affine) -> (Vec<Ink>, Vec<&Shape>) {
                 radius,
                 fill,
                 stroke,
-            } => shape_ink(
-                RoundedRect::from_rect(*bounds, *radius).to_path(0.05),
-                Some(*fill),
-                *stroke,
-                object,
-                transform,
-                &mut inks,
-            ),
+            } => {
+                // SVG rectangles with nonpositive dimensions do not render.
+                // Spring overshoot can invert a shrinking rectangle; kurbo
+                // normalizes those bounds and would paint it on the other side.
+                if bounds.width() > 0. && bounds.height() > 0. {
+                    shape_ink(
+                        RoundedRect::from_rect(*bounds, *radius).to_path(0.05),
+                        Some(*fill),
+                        *stroke,
+                        object,
+                        transform,
+                        &mut inks,
+                    );
+                }
+            }
             Shape::Circle {
                 center,
                 radius,
@@ -475,6 +482,26 @@ pub fn paint(scene: &Scene, fit: Fit, bounds: Bounds<Pixels>, window: &mut Windo
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn collapsed_or_inverted_rectangles_do_not_paint_fill_or_stroke() {
+        let mut object = Object::rect(
+            "bar",
+            kurbo::Rect::new(0., 0., 20., 30.),
+            2.,
+            [0, 0, 0, 255],
+        );
+        for (width, height) in [(20., 30.), (0., 30.), (20., 0.), (-3., 30.), (20., -3.)] {
+            object.shapes = vec![Shape::Rect {
+                bounds: kurbo::Rect::new(0., 0., width, height),
+                radius: 2.,
+                fill: [0, 0, 0, 255],
+                stroke: Some(([255, 0, 0, 255], 1.)),
+            }];
+            let (ink, _) = object_ink(&object, Affine::IDENTITY);
+            assert_eq!(ink.is_empty(), width <= 0. || height <= 0.);
+        }
+    }
+
     #[test]
     fn bitmap_text_stays_centered_on_its_svg_anchor() {
         let metrics = super::super::text::TextMetrics {

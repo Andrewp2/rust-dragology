@@ -92,7 +92,7 @@ Evidence includes 18 source-generated cases: each preset at its initial paramete
 
 ## Verification and platform limits
 
-All 28 editor tests pass, including within the complete gallery suite. The committed reference data contains 61 regex/Dagre cases, 18 stock simulation cases and nine complete source preset models. Ordinary Rust tests consume these fixtures without running JavaScript or accessing the network.
+All 31 editor tests pass, including within the complete gallery suite. Regression checks include compact-grid column selection, invalid parameter ranges on import, and saving/reloading exact volume edits. The committed reference data contains 61 regex/Dagre cases, 18 stock simulation cases and nine complete source preset models. Ordinary Rust tests consume these fixtures without running JavaScript or accessing the network.
 
 Runtime gesture tests advance a frame after pointer movement, matching the source animation-frame lifecycle. Numerical geometry assertions use projected error bounds; for example, the logarithmic time slider must land within 0.01 pixels of its target.
 

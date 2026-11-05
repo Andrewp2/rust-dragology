@@ -614,14 +614,25 @@ impl Example for Scene3d {
                 fill: Some([0, 0, 0, 102]),
                 stroke: None,
             }];
-            let mut hit = shadow;
+            // SVG hits each painted polygon independently. Give the combined
+            // hit path consistent winding so overlapping faces form a union.
+            let mut hit = if shadow.area() < 0. {
+                shadow.reverse_subpaths()
+            } else {
+                shadow
+            };
             for (points, brightness) in faces {
                 let local: Vec<_> = points
                     .iter()
                     .map(|(point, _)| round_local(*point - center))
                     .collect();
                 let face = path(local, true);
-                hit.extend(face.elements().iter().copied());
+                let hit_face = if face.area() < 0. {
+                    face.reverse_subpaths()
+                } else {
+                    face.clone()
+                };
+                hit.extend(hit_face.elements().iter().copied());
                 shapes.push(Shape::Path {
                     path: face,
                     fill: Some(tint(
@@ -695,6 +706,45 @@ impl Example for Scene3d {
 mod tests {
     use super::*;
     use dragology::DragSession;
+
+    #[test]
+    fn projected_box_hits_cover_each_visible_face() {
+        use kurbo::ParamCurveNearest;
+
+        let mut state = Scene3d.initial();
+        for (az, el) in [(35., 28.), (-75., 20.), (135., 60.), (-135., 45.)] {
+            state.az = az;
+            state.el = el;
+            for object in Scene3d.scene(&state).objects {
+                let Some(Hit::Path(hit, width)) = &object.hit else {
+                    continue;
+                };
+                let bounds = hit.bounding_box();
+                for x in 0..20 {
+                    for y in 0..20 {
+                        let point = Point::new(
+                            bounds.x0 + bounds.width() * (f64::from(x) + 0.5) / 20.,
+                            bounds.y0 + bounds.height() * (f64::from(y) + 0.5) / 20.,
+                        );
+                        let painted = object.shapes.iter().any(|shape| {
+                            matches!(shape, Shape::Path { path, fill: Some(_), .. } if path.winding(point) != 0)
+                        });
+                        if painted {
+                            assert!(
+                                hit.winding(point) != 0
+                                    || hit
+                                        .segments()
+                                        .any(|segment| segment.nearest(point, 0.1).distance_sq
+                                            <= width.powi(2) * 0.25),
+                                "{} camera ({az}, {el}) misses a face at {point:?}",
+                                object.id
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     #[test]
     fn resize_handles_are_invisible_until_hover_and_use_css_fade() {

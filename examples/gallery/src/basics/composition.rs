@@ -308,13 +308,16 @@ impl Example for ChangeFrame {
             [238, 238, 238, 255],
             1.,
         ));
-        let a = angle.to_radians();
-        scene.push(Object::circle(
-            "point",
-            (150. + 100. * a.cos(), 150. + 100. * a.sin()),
-            12.,
-            INK,
-        ));
+        scene.push(
+            Object::circle("point", Point::ZERO, 12., INK).transforms(vec![
+                TransformComponent::Translate(Vec2::new(150., 150.)),
+                TransformComponent::Rotate {
+                    radians: angle.to_radians(),
+                    center: Point::ZERO,
+                },
+                TransformComponent::Translate(Vec2::new(100., 0.)),
+            ]),
+        );
         scene
     }
     fn drag(&self, angle: &f64, id: &str, _: Modifiers) -> Option<DragSpec<'static, f64>> {
@@ -593,6 +596,34 @@ mod tests {
             DragSession::begin(state, p, move |s| example.locate(s, "point"), spec).unwrap();
         let next = session.finish((250., 150.)).unwrap();
         assert!(next.abs() < 0.01);
+    }
+
+    #[test]
+    fn reflected_frame_rotates_an_off_center_grab_with_the_point() {
+        let center = Point::new(150., 150.);
+        // Upstream rotates the parent group, including the circle's local
+        // grab offset. Start ten pixels off center and reflect each target.
+        let grab_at = |angle: f64| {
+            center + (Affine::rotate(angle.to_radians()) * Point::new(100., 10.)).to_vec2()
+        };
+        for target_angle in [-90., 0., 45., 90.] {
+            let example = ChangeFrame;
+            let state = example.initial();
+            let spec = example.drag(&state, "point", Modifiers::default()).unwrap();
+            let session = DragSession::begin(
+                state,
+                grab_at(state),
+                move |s| example.locate(s, "point"),
+                spec,
+            )
+            .unwrap();
+            let target = grab_at(target_angle);
+            let next = session.finish((target.x, 300. - target.y)).unwrap();
+            assert!(
+                (next - target_angle).abs() < 0.01,
+                "off-center grab dropped at {next}°, expected {target_angle}°"
+            );
+        }
     }
 
     #[test]

@@ -292,12 +292,19 @@ impl Example for PlanePartition {
         cubes.sort_by_key(|cube| cube.i + cube.j + cube.k);
         for cube in cubes {
             let id = format!("cube-{}", cube.id);
-            scene.push(cube_object(
-                id,
-                origin + project(cube.i as f64, cube.j as f64, cube.k as f64).to_vec2(),
-                false,
-                s.hints && remove.contains(&cube.id),
-            ));
+            scene.push(
+                cube_object(
+                    id,
+                    origin + project(cube.i as f64, cube.j as f64, cube.k as f64).to_vec2(),
+                    false,
+                    s.hints && remove.contains(&cube.id),
+                )
+                .cursor(if remove.contains(&cube.id) {
+                    Cursor::Grab
+                } else {
+                    Cursor::Default
+                }),
+            );
         }
         if s.hints {
             for (i, j, k) in addable(s) {
@@ -334,7 +341,13 @@ impl Example for PlanePartition {
             .text_anchor(TextAnchor::Middle)
             .text_baseline(TextBaseline::Alphabetic),
         );
-        scene.push(cube_object("spare".into(), spare, false, false));
+        scene.push(cube_object("spare".into(), spare, false, false).cursor(
+            if addable(s).is_empty() {
+                Cursor::NotAllowed
+            } else {
+                Cursor::Grab
+            },
+        ));
         scene
     }
     fn scene_dragging(&self, s: &Self::State, id: Option<&str>) -> Scene {
@@ -712,7 +725,13 @@ impl Example for AztecDiamond {
                 }],
             )
             .transforms(aztec_components(s, i));
-            if s.dim_stuck && blocks_of(&settled, i).is_empty() {
+            let flippable = !blocks_of(&settled, i).is_empty();
+            o.cursor = if flippable {
+                Cursor::Grab
+            } else {
+                Cursor::Default
+            };
+            if s.dim_stuck && !flippable {
                 o.opacity = 0.45;
             }
             scene.push(o);
@@ -973,6 +992,41 @@ mod tests {
     fn initial_models_accept_real_engine_gestures() {
         exercise(PlanePartition, vec![PlanePartition.initial()]);
         exercise(AztecDiamond, vec![AztecDiamond.initial()]);
+    }
+    #[test]
+    fn aztec_gestures_follow_multiple_turns_in_both_directions() {
+        let state = initial_aztec(1, false);
+        let (bx, by, partner) = blocks_of(&state, 0)[0];
+        let anchor = Point::new(10., 3.);
+        let start = aztec_transform(&state, 0) * anchor;
+        for sign in [-1., 1.] {
+            let mut session = dragology::DragSession::begin(
+                state.clone(),
+                start,
+                |s| AztecDiamond.locate(s, "domino-0"),
+                AztecDiamond
+                    .drag(&state, "domino-0", Modifiers::default())
+                    .unwrap(),
+            )
+            .unwrap();
+            let mut pointer = start;
+            for step in 0..=144 {
+                let mut target = state.clone();
+                target.turn = Some(Turn {
+                    bx,
+                    by,
+                    ids: [0, partner],
+                    spin: sign * step as f64 * TAU / 72.,
+                });
+                pointer = aztec_transform(&target, 0) * anchor;
+                let frame = session.frame(pointer).unwrap();
+                assert!(frame.grab_position.unwrap().distance(pointer) < 0.1);
+            }
+            let drop = session.finish(pointer).unwrap();
+            assert_eq!(drop.dominoes[0].quarter, sign as i32 * 8);
+            assert_eq!(drop.dominoes[partner].quarter, sign as i32 * 8);
+            assert_eq!(coverage(&drop), coverage(&state));
+        }
     }
     #[test]
     fn every_offered_cube_move_preserves_a_plane_partition() {

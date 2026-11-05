@@ -770,7 +770,7 @@ fn node_drag(s: &State, id: &str) -> NodeDrag {
         planar_frob_partner(s, id)
     };
     for other in s.neighbors(id) {
-        let mut target = |spec| branches.push((other.clone(), spec));
+        let mut target = |priority, spec| branches.push((priority, other.clone(), spec));
         let o = s.pos(&other);
         let og = s.nodes[&other].kind;
         if (g == Kind::Unit && og == Kind::Mult)
@@ -783,7 +783,15 @@ fn node_drag(s: &State, id: &str) -> NodeDrag {
             } else {
                 (other.as_str(), id)
             };
-            target(conditional(unit(s, u, m), move |c| c.distance(o) < 30.));
+            let port = if s.kind(u) == Some(Kind::Unit) {
+                s.wires[&s.from(u, 0)].to.i
+            } else {
+                s.wires[&s.to(u, 0)].from.i
+            };
+            target(
+                port,
+                conditional(unit(s, u, m), move |c| c.distance(o) < 30.),
+            );
         }
         if g == og && matches!(g, Kind::Mult | Kind::Comult) {
             let w = s
@@ -805,11 +813,11 @@ fn node_drag(s: &State, id: &str) -> NodeDrag {
             let result = assoc(s, sat, hub);
             if result.acyclic() {
                 if s.tangle {
-                    target(conditional(result, move |c| c.distance(o) < 24.));
+                    target(2, conditional(result, move |c| c.distance(o) < 24.));
                 } else {
                     let side = if k == 0 { -1. } else { 1. };
                     let dir = if sat == id { -side } else { side };
-                    target(conditional(result, move |c| (c.x - o.x) * dir > 8.));
+                    target(2, conditional(result, move |c| (c.x - o.x) * dir > 8.));
                     if dir > 0. {
                         xb.0 = xb.0.max(o.x + 2.)
                     } else {
@@ -844,21 +852,26 @@ fn node_drag(s: &State, id: &str) -> NodeDrag {
                     let tangle = s.tangle;
                     let is_c = id == c;
                     let going_up = o.y < p.y;
-                    target(conditional(result, move |q| {
-                        let pass = if tangle {
-                            q.distance(o) < 24.
-                        } else if going_up {
-                            q.y < o.y - 8.
-                        } else {
-                            q.y > o.y + 8.
-                        };
-                        let side = if tangle { q.y <= o.y } else { q.x < o.x };
-                        pass && (to == Form::H
-                            || (side
-                                && ((is_c && to == Form::Left) || (!is_c && to == Form::Right)))
-                            || (!side
-                                && ((is_c && to == Form::Right) || (!is_c && to == Form::Left))))
-                    }));
+                    target(
+                        3,
+                        conditional(result, move |q| {
+                            let pass = if tangle {
+                                q.distance(o) < 24.
+                            } else if going_up {
+                                q.y < o.y - 8.
+                            } else {
+                                q.y > o.y + 8.
+                            };
+                            let side = if tangle { q.y <= o.y } else { q.x < o.x };
+                            pass && (to == Form::H
+                                || (side
+                                    && ((is_c && to == Form::Left)
+                                        || (!is_c && to == Form::Right)))
+                                || (!side
+                                    && ((is_c && to == Form::Right)
+                                        || (!is_c && to == Form::Left))))
+                        }),
+                    );
                 }
             }
         }
@@ -885,8 +898,11 @@ fn node_drag(s: &State, id: &str) -> NodeDrag {
         },
     )
     .during(move |s| s.clone().tidy(Some(&layout_id)));
-    let targets = branches.iter().map(|(id, _)| id.clone()).collect();
-    let mut specs: Vec<_> = branches.into_iter().map(|(_, spec)| spec).collect();
+    // Upstream tries unit/counit rules in port order, then associativity,
+    // then Frobenius. Several crossing regions can be active at once.
+    branches.sort_by_key(|(priority, _, _)| *priority);
+    let targets = branches.iter().map(|(_, id, _)| id.clone()).collect();
+    let mut specs: Vec<_> = branches.into_iter().map(|(_, _, spec)| spec).collect();
     specs.push(free);
     NodeDrag {
         spec: closest(specs)
@@ -1303,6 +1319,59 @@ pub fn entries() -> Vec<Entry> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn planar_associativity_precedes_frobenius_when_both_crossings_apply() {
+        let state = preset(false, 1);
+        let expected = assoc(&state, "d2", "d1");
+        let spec = node_drag(&state, "d1").spec;
+        let start = state.pos("d1");
+        let session = dragology::DragSession::begin(
+            state,
+            start,
+            |s| Some(Affine::translate(s.pos("d1").to_vec2())),
+            spec,
+        )
+        .unwrap();
+        // This crosses left of d2 and above l. Upstream genSpec places the
+        // associativity branch before either Frobenius branch.
+        let result = session.finish((80., 100.)).unwrap();
+        assert_eq!(result.wires, expected.wires);
+    }
+
+    #[test]
+    fn tangle_associativity_precedes_frobenius_for_overlapping_targets() {
+        let example = Frobenius(true);
+        let state = example
+            .click(
+                &preset(true, 2),
+                "node-m1",
+                Point::ORIGIN,
+                Modifiers::default(),
+                1,
+            )
+            .unwrap();
+        let move_node = |state: State, id: &str, target: Point| {
+            let spec = node_drag(&state, id).spec;
+            let start = state.pos(id);
+            let id = id.to_owned();
+            dragology::DragSession::begin(
+                state,
+                start,
+                move |s| Some(Affine::translate(s.pos(&id).to_vec2())),
+                spec,
+            )
+            .unwrap()
+            .finish(target)
+            .unwrap()
+        };
+        // Free movement can put two legal targets within the same hit radius.
+        let state = move_node(state, "m3", Point::new(190., 100.));
+        assert!(form(&state, "m1", "d2").is_some());
+        let expected = assoc(&state, "m1", "m3");
+        let result = move_node(state, "m1", Point::new(180., 100.));
+        assert_eq!(result.wires, expected.wires);
+    }
     fn halo_ids(scene: &Scene) -> Vec<&str> {
         scene
             .objects

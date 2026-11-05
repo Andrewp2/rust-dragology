@@ -257,7 +257,7 @@ impl Example for Robot {
             scene.push(Object::new(
                 format!("segment-{i}"),
                 arm_transform(s, i),
-                Some(Hit::Rect(bounds)),
+                Some(Hit::Path(bounds.to_rounded_rect(w / 2.).to_path(0.01), 1.5)),
                 vec![Shape::Rect {
                     bounds,
                     radius: w / 2.,
@@ -333,16 +333,16 @@ impl Example for Robot {
         }
         for i in 0..4 {
             let color = [rgb(0xef4444), rgb(0x3b82f6), rgb(0x22c55e), rgb(0xa855f7)][i];
-            if dragged.is_some() && grabbable(s) == Some(i) {
-                scene.push(circle_outline(
-                    format!("target-{i}"),
-                    ball_position(s, i),
-                    18.,
-                    color,
-                    2.,
-                    &[4., 3.],
-                ));
-            }
+            let mut target = circle_outline(
+                format!("target-{i}"),
+                ball_position(s, i),
+                18.,
+                color,
+                2.,
+                &[4., 3.],
+            );
+            target.opacity = f64::from(dragged.is_some() && grabbable(s) == Some(i));
+            scene.push(target);
             let mut ball =
                 Object::circle(format!("ball-{i}"), ball_position(s, i), 13., color).decorative();
             ball.shapes.push(Shape::Circle {
@@ -502,6 +502,43 @@ impl Example for Robot {
 mod tests {
     use super::*;
     use dragology::DragSession;
+
+    #[test]
+    fn link_hit_geometry_excludes_empty_corners_and_includes_the_stroke() {
+        let scene = Robot.scene(&Robot.initial());
+        for (i, width) in WIDTHS.into_iter().enumerate() {
+            let Some(Hit::Path(hit, stroke)) = &scene.object(&format!("segment-{i}")).unwrap().hit
+            else {
+                panic!("link must use its rounded outline")
+            };
+            assert_eq!(*stroke, 1.5);
+            assert_ne!(hit.winding(Point::new(LENGTHS[i] / 2., 0.)), 0);
+            assert_eq!(
+                hit.winding(Point::new(-width / 2. + 0.1, -width / 2. + 0.1)),
+                0
+            );
+        }
+    }
+
+    #[test]
+    fn pickup_feedback_keeps_its_identity_while_opacity_changes() {
+        let initial = Robot.initial();
+        let press = joints(&initial)[4];
+        let spec = Robot.drag(&initial, "claw", Modifiers::default()).unwrap();
+        let mut session =
+            DragSession::begin(initial.clone(), press, |s| Robot.locate(s, "claw"), spec).unwrap();
+        let frame = session.frame(Point::new(410., 357.)).unwrap();
+        let dragology::Preview::State(approaching) = &*frame.preview else {
+            panic!("arm drag must preview its current configuration")
+        };
+        let before = Robot.scene(&initial);
+        let during = Robot.scene_dragging(approaching, Some("claw"));
+        for i in 0..4 {
+            let id = format!("target-{i}");
+            assert_eq!(before.object(&id).unwrap().opacity, 0.);
+            assert_eq!(during.object(&id).unwrap().opacity, f64::from(i == 2));
+        }
+    }
 
     #[test]
     fn base_and_tidy_hits_follow_painted_geometry_instead_of_enclosing_rectangles() {
