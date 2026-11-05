@@ -13,7 +13,7 @@ cargo run --release -p dragology-gallery -- --demo stock-and-flow
 cargo run -p dragology-gallery -- --list
 ```
 
-GPUI requires the platform's native development libraries; see the [Ubuntu setup](../../README.md#native-integrations). The workspace lockfile pins the tested dependency graph. This experimental port has been exercised on Ubuntu 24.04, x86-64, with X11; other native platforms and Wayland sessions have not been verified.
+GPUI requires the platform's native development libraries; see the [Ubuntu setup](../../README.md#native-integrations). Beta 1 (`0.1.0-beta.1`) pins Rust 1.97.1 and the tested dependency graph. The native gallery has been exercised on Ubuntu 24.04, x86-64, with X11; other native platforms and Wayland sessions are outside this beta's tested scope. The [beta release policy](../../README.md#beta-release-policy) defines API changes and version pinning.
 
 The first release build takes longer. Omitting `--release` runs unoptimized code and can add noticeable latency to geometry-heavy demos.
 
@@ -45,8 +45,8 @@ This is not a claim of complete visual or API equivalence. See [PORTING.md](../.
 ## Verification
 
 ```sh
-cargo +stable test --locked -p dragology-gallery --lib --tests
-cargo +stable build --locked -p dragology-gallery --bin dragology-gallery
+cargo test --locked -p dragology-gallery --lib --tests
+cargo build --locked -p dragology-gallery --bin dragology-gallery
 ```
 
 Tests exercise legal gestures and model invariants: list identities, puzzle moves, constrained geometry, algebraic equivalence, capture-avoiding substitution, proof chaining, tree balancing, automata, tableaux, knots, and diagram rewrites. Inventory checks guard against missing or duplicate demos, invalid initial scenes, and broken preset or toggle actions. The algebra builder startup test runs in its own process to catch ID collisions that prior activity could hide. The [gallery CI job](../../.github/workflows/ci.yml) runs these checks without a display. Native screenshots and input checks supplement the tests; they do not exhaust every reachable demo state. Reference fixtures execute selected original TypeScript algorithms, including core operators, regex layouts, and stock-and-flow trajectories.

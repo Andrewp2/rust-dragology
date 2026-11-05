@@ -6,11 +6,23 @@ This is a Rust port of the model-driven operators from [Dragology](https://githu
 
 ## Status and tested platforms
 
-**Experimental, version 0.1.0.** The API is evolving, and future releases may require changes in applications that use it. This is an independent Rust port; the original algorithms and demo designs are the work of the Dragology contributors.
+**Beta 1, version 0.1.0-beta.1.** Ready for application integration and feedback within the scope below. This is an independent Rust port; the original algorithms and demo designs are the work of the Dragology contributors.
 
-Local verification uses Rust 1.97.1 on Ubuntu 24.04, x86-64. Native GPUI interaction checks use X11. Other operating systems, Wayland sessions, and WebAssembly have not been verified for this port. A minimum supported Rust version has not been established; CI follows stable Rust with the committed lockfile.
+| Surface | Beta verification |
+| --- | --- |
+| Renderer-independent core and shared scene | Tests, Clippy, and API documentation on Linux, Windows, and macOS |
+| egui, GPUI, and wgpu adapters | Ubuntu 24.04 builds of all three Hanoi examples; egui input tests and headless wgpu rendering tests |
+| Full GPUI gallery | All 119 demo IDs; model, source-reference, and interaction regressions; native X11 screen and gesture checks |
 
-The [CI workflow](.github/workflows/ci.yml) checks formatting, core and shared-scene tests, Clippy, and API documentation. A separate job builds the GPUI gallery and runs its model and integration tests without opening a window. Native rendering and input still need manual checks. The gallery includes every upstream demo ID. The [porting notes](PORTING.md) describe the source reference, verification, and remaining gaps.
+The supported compiler baseline is **Rust 1.97.1**, pinned in `rust-toolchain.toml`; the lockfile pins dependency versions. Earlier compilers have not been qualified. Interactive native verification uses Ubuntu 24.04, x86-64, with X11. Native UI behavior on macOS/Windows, Wayland sessions, and WebAssembly is outside this beta's tested scope.
+
+The [CI workflow](.github/workflows/ci.yml) checks these build and test targets. GPU tests use Mesa's software Vulkan adapter. Native screen and gesture checks supplement CI; they do not establish complete parity across every reachable state. The [porting notes](PORTING.md) describe the source reference and remaining differences.
+
+### Beta release policy
+
+The current operators, preview model, host boundary, and adapter APIs form the beta integration baseline. Work toward stable 0.1.0 focuses on correctness, usability, and feedback from applications. Any deliberate breaking API change requires a new beta version and migration notes in its [GitHub release](https://github.com/Andrewp2/rust-dragology/releases). Pin a release tag when integrating; `main` remains the development branch.
+
+The full source-gallery lifecycle is implemented in GPUI. The three small adapters support the documented rectangle/circle scene API. Browser debugging tools and pixel-identical browser rendering are outside the beta scope. Original Nursery and teaching experiments retain their upstream behavior and wording.
 
 ## A toggle
 
@@ -78,7 +90,7 @@ The Rust API also accepts custom operators. Each frame carries its active operat
 The native gallery includes all **119 demos** from the pinned upstream list, including the **19 Nursery demos**. It covers the small drag experiments, list and tree editors, puzzles, constrained geometry, algebra, knots, string diagrams, and stock-and-flow models.
 
 ```sh
-git clone https://github.com/Andrewp2/rust-dragology.git
+git clone --branch v0.1.0-beta.1 https://github.com/Andrewp2/rust-dragology.git
 cd rust-dragology
 cargo run --release -p dragology-gallery
 cargo run --release -p dragology-gallery -- --demo knot
@@ -106,7 +118,8 @@ On Ubuntu 24.04, install the native build dependencies for the GPUI gallery and 
 sudo apt-get update
 sudo apt-get install --no-install-recommends -y \
   build-essential pkg-config libfontconfig1-dev \
-  libwayland-dev libxkbcommon-x11-dev fonts-dejavu-core
+  libwayland-dev libxkbcommon-x11-dev fonts-dejavu-core \
+  libvulkan1 mesa-vulkan-drivers
 ```
 
 The workspace lockfile records the dependency versions used by the demos.
@@ -144,19 +157,27 @@ The headless example prints the candidate order and floating row position at eac
 To depend on the library directly from GitHub:
 
 ```sh
-cargo add dragology --git https://github.com/Andrewp2/rust-dragology
+cargo add dragology --git https://github.com/Andrewp2/rust-dragology --tag v0.1.0-beta.1
 ```
 
 To run the library checks used by CI:
 
 ```sh
-cargo +stable fmt --all --check
-cargo +stable test --locked -p dragology -p dragology-scene
-cargo +stable clippy --locked -p dragology -p dragology-scene --all-targets -- -D warnings
-RUSTDOCFLAGS='-D warnings' cargo +stable doc --locked -p dragology -p dragology-scene --no-deps
+cargo fmt --all --check
+cargo test --locked -p dragology -p dragology-scene
+cargo clippy --locked -p dragology -p dragology-scene --all-targets -- -D warnings
+RUSTDOCFLAGS='-D warnings' cargo doc --locked -p dragology -p dragology-scene --no-deps
 ```
 
-After installing the native dependencies, run the gallery checks with `cargo +stable test --locked -p dragology-gallery --lib --tests`. These include a separate startup regression for the algebra builder, so other demos cannot hide an ID collision by consuming IDs first.
+After installing the Linux native dependencies, run the remaining CI checks:
+
+```sh
+cargo test --locked -p dragology-egui -p dragology-wgpu --tests
+cargo test --locked -p dragology-gallery --lib --tests
+cargo build --locked --workspace --examples --bins
+```
+
+Adapter tests exercise egui release/cancellation and actual wgpu drawing, clipping, color, and viewport reset through software Vulkan without a window. Gallery checks include a separate startup regression for the algebra builder, so other demos cannot hide an ID collision by consuming IDs first.
 
 ## License and attribution
 

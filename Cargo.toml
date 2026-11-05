@@ -1,6 +1,6 @@
 [package]
 name = "dragology"
-version = "0.1.0"
+version.workspace = true
 edition = "2024"
 description = "Renderer-independent, model-driven dragging"
 license = "MIT"
@@ -17,3 +17,6 @@ serde_json = { version = "1", features = ["float_roundtrip"] }
 resolver = "3"
 members = ["crates/*", "examples/hanoi", "examples/gallery"]
 default-members = ["."]
+
+[workspace.package]
+version = "0.1.0-beta.1"

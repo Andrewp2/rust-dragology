@@ -41,7 +41,7 @@ The source-comparison reports record the changes and limits for each family:
 
 ## Remaining limits
 
-The project should continue to be described as an **experimental Rust port**, without claiming complete API or pixel equivalence.
+The project is a **beta Rust port** with the support and API-change policy described in the [README](README.md#status-and-tested-platforms). Beta covers the documented engine, adapters, and native gallery. It does not claim complete API or pixel equivalence with the browser implementation.
 
 - Upstream’s operator-tree inspector, debug overlays, drop-zone visualizer, and browser fuzzing interface are not ported. Their absence matters for demos teaching those tools.
 - SVG is represented by native objects, rather than an arbitrary SVG DOM. Raw path commands are normalized to absolute curves; inherited paint, nested group compositing, some property transitions, and unsupported transform-list combinations can differ. The interpolation report identifies these boundaries.

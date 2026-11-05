@@ -16,50 +16,61 @@ env:
   CARGO_TERM_COLOR: always
   CARGO_PROFILE_DEV_DEBUG: "0"
   CARGO_INCREMENTAL: "0"
+  RUST_TOOLCHAIN: "1.97.1"
 
 jobs:
   library:
-    name: Library
-    runs-on: ubuntu-24.04
+    name: Library (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
-      - name: Install stable Rust
-        run: rustup toolchain install stable --profile minimal --component rustfmt --component clippy
+      - name: Install Rust
+        run: rustup toolchain install ${{ env.RUST_TOOLCHAIN }} --profile minimal --component rustfmt --component clippy
       - uses: Swatinem/rust-cache@v2
         with:
           key: library
       - name: Check formatting
-        run: cargo +stable fmt --all --check
+        run: cargo fmt --all --check
       - name: Test core and shared scene
-        run: cargo +stable test --locked -p dragology -p dragology-scene
+        run: cargo test --locked -p dragology -p dragology-scene
       - name: Lint core and shared scene
-        run: cargo +stable clippy --locked -p dragology -p dragology-scene --all-targets -- -D warnings
+        run: cargo clippy --locked -p dragology -p dragology-scene --all-targets -- -D warnings
       - name: Build API documentation
         env:
           RUSTDOCFLAGS: -D warnings
-        run: cargo +stable doc --locked -p dragology -p dragology-scene --no-deps
+        run: cargo doc --locked -p dragology -p dragology-scene --no-deps
 
   gallery:
-    name: GPUI gallery
+    name: Native adapters and gallery (Linux)
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
       CARGO_BUILD_JOBS: "2"
     steps:
       - uses: actions/checkout@v6
-      - name: Install stable Rust
-        run: rustup toolchain install stable --profile minimal
+      - name: Install Rust
+        run: rustup toolchain install ${{ env.RUST_TOOLCHAIN }} --profile minimal --component rustfmt --component clippy
       - uses: Swatinem/rust-cache@v2
         with:
-          key: gallery
+          key: native
       - name: Install native dependencies
         run: |
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y \
             build-essential pkg-config libfontconfig1-dev \
-            libwayland-dev libxkbcommon-x11-dev fonts-dejavu-core
+            libwayland-dev libxkbcommon-x11-dev fonts-dejavu-core \
+            libvulkan1 mesa-vulkan-drivers
+      - name: Test adapter input and GPU rendering
+        env:
+          WGPU_BACKEND: vulkan
+          XDG_RUNTIME_DIR: /tmp
+        run: cargo test --locked -p dragology-egui -p dragology-wgpu --tests
       - name: Test gallery models and integrations
-        run: cargo +stable test --locked -p dragology-gallery --lib --tests
-      - name: Build native gallery
-        run: cargo +stable build --locked -p dragology-gallery --bin dragology-gallery
+        run: cargo test --locked -p dragology-gallery --lib --tests
+      - name: Build all native examples and gallery
+        run: cargo build --locked --workspace --examples --bins

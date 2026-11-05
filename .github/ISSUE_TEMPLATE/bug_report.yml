@@ -1,0 +1,24 @@
+name: Bug report
+description: Report a library, adapter, or demo problem.
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include the demo ID or a small code example, and the steps or drag gesture that fails.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: A screenshot or recording helps with visual issues. Include an upstream comparison when relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Version and environment
+      description: Release tag or commit, Rust version, operating system, renderer, and X11/Wayland when applicable. Include any error output.
+    validations:
+      required: true
