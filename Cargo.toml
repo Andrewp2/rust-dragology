@@ -1,0 +1,19 @@
+[package]
+name = "dragology"
+version = "0.1.0"
+edition = "2024"
+description = "Renderer-independent, model-driven dragging"
+license = "MIT"
+repository = "https://github.com/Andrewp2/rust-dragology"
+
+[dependencies]
+kurbo = "0.13.1"
+spade = "2.15.1"
+
+[dev-dependencies]
+serde_json = { version = "1", features = ["float_roundtrip"] }
+
+[workspace]
+resolver = "3"
+members = ["crates/*", "examples/hanoi", "examples/gallery"]
+default-members = ["."]

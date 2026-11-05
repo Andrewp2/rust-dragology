@@ -1,0 +1,20 @@
+[package]
+name = "dragology-gallery"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[dependencies]
+dragology = { path = "../.." }
+dragology-gpui = { path = "../../crates/gpui" }
+gpui = "0.2.2"
+kurbo = "0.13.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order", "float_roundtrip"] }
+indexmap = { version = "2", features = ["serde"] }
+dagre = "=0.1.2"
+usvg = "0.45.1"
+unicode-linebreak = "0.1.5"
+chrono = "0.4"
+pulldown-cmark = "0.13"

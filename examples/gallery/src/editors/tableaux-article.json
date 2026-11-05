@@ -1,0 +1,1003 @@
+[
+  {
+    "kind": "paragraph",
+    "text": "This is a short, hands-on introduction to Young tableaux: grids of numbers that show up all over combinatorics, representation theory, and even the study of random sorting. No background is assumed beyond being comfortable with whole numbers. Every idea comes with something to drag, and the algorithms in this subject are unusually well suited to dragging: each one is a rule for how boxes move, and each drag below is that rule made physical.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "This is a short, hands-on introduction to "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Young tableaux"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ": grids of numbers that show up all over combinatorics, representation theory, and even the study of random sorting. No background is assumed beyond being comfortable with whole numbers. Every idea comes with something to drag, and the algorithms in this subject are unusually well suited to dragging: each one is a rule for how boxes move, and each drag below is that rule made physical."
+      }
+    ]
+  },
+  {
+    "kind": "heading",
+    "text": "1. Shapes",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "1. Shapes"
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "A partition of a number n is a way of writing it as a sum of positive whole numbers, written in decreasing order. For example, (3, 2, 2) is a partition of 7. We draw a partition as a Young diagram: rows of boxes, stacked top to bottom, each row no longer than the one above it and all flush against the left edge.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "A "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "partition"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " of a number "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "n"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " is a way of writing it as a sum of positive whole numbers, written in decreasing order. For example, (3, 2, 2) is a partition of 7. We draw a partition as a "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Young diagram"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ": rows of boxes, stacked top to bottom, each row no longer than the one above it and all flush against the left edge."
+      }
+    ]
+  },
+  {
+    "kind": "figure",
+    "text": "0"
+  },
+  {
+    "kind": "caption",
+    "text": "Try it: drag a highlighted corner box somewhere else. The dashed squares show where it can land. Only some boxes are draggable: a box can be removed only if nothing is to its right or below it, and it can be dropped only where the result is still a Young diagram. Those two positions are called removable and addable corners.",
+    "runs": [
+      {
+        "weight": 600,
+        "italic": false,
+        "mono": false,
+        "color": "92400e",
+        "text": "Try it: drag a highlighted corner box somewhere else. The dashed squares show where it can land."
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "4b5563",
+        "text": " Only some boxes are draggable: a box can be removed only if nothing is to its right or below it, and it can be dropped only where the result is still a Young diagram. Those two positions are called removable and addable corners."
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "A single-row diagram and a single-column diagram are the two extremes; everything else is somewhere in between. Keep the notion of a \"corner\" in mind. It comes back when we grow tableaux one box at a time.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "A single-row diagram and a single-column diagram are the two extremes; everything else is somewhere in between. Keep the notion of a \"corner\" in mind. It comes back when we grow tableaux one box at a time."
+      }
+    ]
+  },
+  {
+    "kind": "heading",
+    "text": "2. Fillings: the two rules",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "2. Fillings: the two rules"
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "A Young tableau is a Young diagram with a number in every box, obeying two rules: numbers increase along each row, left to right, and increase down each column, top to bottom. If the numbers are exactly 1, 2, …, n with each used once, it is a standard Young tableau. (If repeats are allowed and rows are only required to be non-decreasing, it is semistandard. We'll mostly use standard ones.)",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "A "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Young tableau"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " is a Young diagram with a number in every box, obeying two rules: numbers "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "increase along each row"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ", left to right, and "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "increase down each column"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ", top to bottom. If the numbers are exactly 1, 2, …, "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "n"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " with each used once, it is a "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "standard"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " Young tableau. (If repeats are allowed and rows are only required to be non-decreasing, it is "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "semistandard"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ". We'll mostly use standard ones.)"
+      }
+    ]
+  },
+  {
+    "kind": "figure",
+    "text": "1"
+  },
+  {
+    "kind": "caption",
+    "text": "Try it: drag a number onto another box to swap them. Broken rules show up as red edges. Notice that 1 has to be in the top-left corner and n has to be at a removable corner. Each valid filling you land on fills in one of the blank templates on the right. Can you find all 16?",
+    "runs": [
+      {
+        "weight": 600,
+        "italic": false,
+        "mono": false,
+        "color": "92400e",
+        "text": "Try it: drag a number onto another box to swap them. Broken rules show up as red edges."
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "4b5563",
+        "text": " Notice that 1 has to be in the top-left corner and n has to be at a removable corner. Each valid filling you land on fills in one of the blank templates on the right. Can you find all 16?"
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "Counting standard tableaux of a given shape is a famous problem; the answer is given by the beautiful hook length formula. But rather than count them, we're going to build them, using an algorithm whose every step is a little cascade of motion.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Counting standard tableaux of a given shape is a famous problem; the answer is given by the beautiful "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "hook length formula"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ". But rather than count them, we're going to "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "build"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " them, using an algorithm whose every step is a little cascade of motion."
+      }
+    ]
+  },
+  {
+    "kind": "heading",
+    "text": "3. Row insertion: the bumping rule",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "3. Row insertion: the bumping rule"
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "Here is the central operation of this whole subject. To row-insert a number x into a tableau:",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Here is the central operation of this whole subject. To "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "row-insert"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " a number "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "x"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " into a tableau:"
+      }
+    ]
+  },
+  {
+    "kind": "list-item",
+    "text": "Look at the first row. If x is at least as big as everything there, add it at the end of the row. Done.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Look at the first row. If "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "x"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " is at least as big as everything there, add it at the end of the row. Done."
+      }
+    ],
+    "number": 1
+  },
+  {
+    "kind": "list-item",
+    "text": "Otherwise, find the leftmost entry that is bigger than x. Put x in its place and bump that entry out.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Otherwise, find the leftmost entry that is bigger than "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "x"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ". Put "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "x"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " in its place and "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "bump"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " that entry out."
+      }
+    ],
+    "number": 2
+  },
+  {
+    "kind": "list-item",
+    "text": "Insert the bumped entry into the next row, by the same rule.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Insert the bumped entry into the next row, by the same rule."
+      }
+    ],
+    "number": 3
+  },
+  {
+    "kind": "paragraph",
+    "text": "The bumped entry can bump another, which can bump another, and so on. Each bump moves an entry one row down, and the cascade ends when something lands at the end of a row (possibly a brand-new row). The tableau grows by exactly one box, at a corner, and stays a valid tableau.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "The bumped entry can bump another, which can bump another, and so on. Each bump moves an entry one row down, and the cascade ends when something lands at the end of a row (possibly a brand-new row). The tableau grows by exactly one box, at a corner, and stays a valid tableau."
+      }
+    ]
+  },
+  {
+    "kind": "figure",
+    "text": "2"
+  },
+  {
+    "kind": "caption",
+    "text": "Try it: press “insert next number”, then “do this step” repeatedly. The number being inserted waits beside the row it is about to enter; the entry it will bump is outlined in red. The first number, 1, bumps a 2, which bumps the 3, which bumps the 6 into a brand-new row: four boxes move for one insertion. The 6 later on just lands at the end of the top row. In general, small numbers cause long cascades and big numbers cause short ones.",
+    "runs": [
+      {
+        "weight": 600,
+        "italic": false,
+        "mono": false,
+        "color": "92400e",
+        "text": "Try it: press “insert next number”, then “do this step” repeatedly. The number being inserted waits beside the row it is about to enter; the entry it will bump is outlined in red."
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "4b5563",
+        "text": " The first number, 1, bumps a 2, which bumps the 3, which bumps the 6 into a brand-new row: four boxes move for one insertion. The 6 later on just lands at the end of the top row. In general, small numbers cause long cascades and big numbers cause short ones."
+      }
+    ]
+  },
+  {
+    "kind": "heading",
+    "text": "4. From a permutation to a pair of tableaux",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "4. From a permutation to a pair of tableaux"
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "Now take a permutation, a shuffling of 1, …, n, like 4 1 6 2 5 3, and row-insert its numbers one at a time into an empty tableau. The result is a standard Young tableau P, the insertion tableau. Along the way, each insertion added one new box; write the step number (1, 2, 3, …) into that box in a second diagram of the same shape. That second diagram is Q, the recording tableau, and it is automatically standard too: later boxes are always added at corners, so they sit right of and below earlier ones.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Now take a "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "permutation"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ", a shuffling of 1, …, "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "n"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ", like 4 1 6 2 5 3, and row-insert its numbers one at a time into an empty tableau. The result is a standard Young tableau "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "P"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ", the "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "insertion tableau"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ". Along the way, each insertion added one new box; write the step number (1, 2, 3, …) into that box in a second diagram of the same shape. That second diagram is "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Q"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ", the "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "recording tableau"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ", and it is automatically standard too: later boxes are always added at corners, so they sit right of and below earlier ones."
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "This is the Robinson–Schensted correspondence (RSK, with a K for Knuth, who generalized it). Its headline property is that it is a bijection: from the pair (P, Q) you can run the whole thing backwards and recover the permutation, so every permutation of n corresponds to exactly one pair of same-shaped standard tableaux, and vice versa. Squaring the number of tableaux of each shape and adding over all shapes gives n!, a fact that is far from obvious if you try to prove it any other way.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "This is the "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Robinson–Schensted correspondence"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " (RSK, with a K for Knuth, who generalized it). Its headline property is that it is a "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "bijection"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ": from the pair (P, Q) you can run the whole thing backwards and recover the permutation, so every permutation of "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "n"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " corresponds to exactly one pair of same-shaped standard tableaux, and vice versa. Squaring the number of tableaux of each shape and adding over all shapes gives "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "n"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "!, a fact that is far from obvious if you try to prove it any other way."
+      }
+    ]
+  },
+  {
+    "kind": "figure",
+    "text": "3"
+  },
+  {
+    "kind": "caption",
+    "text": "Try it: drag numbers around in the strip to change the permutation and watch both tableaux reconfigure. Drag the red cursor left to insert only the first few numbers and step through the algorithm. Some things to look for: sort the strip into 1 2 3 4 5 6 and both tableaux collapse into a single row; reverse it and they become a single column. In general, the length of the top row of P equals the length of the longest increasing subsequence of the permutation (Schensted's theorem), and the number of rows equals the longest decreasing one.",
+    "runs": [
+      {
+        "weight": 600,
+        "italic": false,
+        "mono": false,
+        "color": "92400e",
+        "text": "Try it: drag numbers around in the strip to change the permutation and watch both tableaux reconfigure. Drag the red cursor left to insert only the first few numbers and step through the algorithm."
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "4b5563",
+        "text": " Some things to look for: sort the strip into 1 2 3 4 5 6 and both tableaux collapse into a single row; reverse it and they become a single column. In general, the length of the top row of P equals the length of the "
+      },
+      {
+        "weight": 700,
+        "italic": true,
+        "mono": false,
+        "color": "4b5563",
+        "text": "longest increasing subsequence"
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "4b5563",
+        "text": " of the permutation (Schensted's theorem), and the number of rows equals the longest decreasing one."
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "Schensted's theorem is why RSK matters outside pure combinatorics: the top-row length of a random permutation's tableau is the length of its longest increasing subsequence, and understanding how that length fluctuates for large n turned out to connect to random matrices and a great deal of modern probability.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Schensted's theorem is why RSK matters outside pure combinatorics: the top-row length of a random permutation's tableau is the length of its longest increasing subsequence, and understanding how that length fluctuates for large "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "n"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " turned out to connect to random matrices and a great deal of modern probability."
+      }
+    ]
+  },
+  {
+    "kind": "heading",
+    "text": "5. Sliding: jeu de taquin",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "5. Sliding: jeu de taquin"
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "Finally, a different way to move boxes. Take a Young diagram and cut a smaller Young diagram out of its top-left corner. What remains is a skew shape, and a filling of it obeying the two rules is a skew tableau. The grey region below is the cut-out part.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Finally, a different way to move boxes. Take a Young diagram and cut a smaller Young diagram out of its top-left corner. What remains is a "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "skew shape"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ", and a filling of it obeying the two rules is a "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "skew tableau"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ". The grey region below is the cut-out part."
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "Jeu de taquin (\"the teasing game\", after the French name for the 15-puzzle) is a way to slide the skew tableau inward until the hole is gone. Open a hole at an inner corner of the grey region. Two boxes can slide into it: the one to its right and the one below. Slide in the smaller of the two. That moves the hole one step right or down; repeat until the hole reaches the outside edge of the shape, where it can simply be closed. Doing this until no grey region is left is called rectification.",
+    "runs": [
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Jeu de taquin"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " (\"the teasing game\", after the French name for the 15-puzzle) is a way to slide the skew tableau inward until the hole is gone. Open a hole at an inner corner of the grey region. Two boxes can slide into it: the one to its right and the one below. Slide in the "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "smaller"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " of the two. That moves the hole one step right or down; repeat until the hole reaches the outside edge of the shape, where it can simply be closed. Doing this until no grey region is left is called "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "rectification"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "."
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "Why the smaller one? Because it's the only choice that keeps the rows and columns in order. In this interactive, the legal moves are computed by exactly that test, \"does the result still obey the two rules?\", and the algorithm falls out on its own. That is also why the drag chains: as soon as one slide completes, the next legal slide is offered, so one continuous drag walks the hole all the way out.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Why the smaller one? Because it's the only choice that keeps the rows and columns in order. In this interactive, the legal moves are computed by exactly that test, \"does the result still obey the two rules?\", and the algorithm falls out on its own. That is also why the drag chains: as soon as one slide completes, the next legal slide is offered, so one continuous drag walks the hole all the way out."
+      }
+    ]
+  },
+  {
+    "kind": "figure",
+    "text": "4"
+  },
+  {
+    "kind": "caption",
+    "text": "Try it: click a + to open a hole, then drag it. Keep dragging toward the bottom-right and it will chain through every slide; back up and the slides undo. At the edge, click × to close it. Repeat until the grey region is gone. Two theorems to test. First, the result of rectification does not depend on which inner corner you choose at each stage: reset and try the corners in a different order. Second, the \"reading word\" (the entries read row by row, bottom to top) changes as you slide, but its insertion tableau under RSK never does, and it equals the rectified tableau.",
+    "runs": [
+      {
+        "weight": 600,
+        "italic": false,
+        "mono": false,
+        "color": "92400e",
+        "text": "Try it: click a "
+      },
+      {
+        "weight": 700,
+        "italic": false,
+        "mono": false,
+        "color": "92400e",
+        "text": "+"
+      },
+      {
+        "weight": 600,
+        "italic": false,
+        "mono": false,
+        "color": "92400e",
+        "text": " to open a hole, then drag it. Keep dragging toward the bottom-right and it will chain through every slide; back up and the slides undo. At the edge, click × to close it. Repeat until the grey region is gone."
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "4b5563",
+        "text": " Two theorems to test. First, the result of rectification does not depend on which inner corner you choose at each stage: reset and try the corners in a different order. Second, the \"reading word\" (the entries read row by row, bottom to top) changes as you slide, but its insertion tableau under RSK never does, and it equals the rectified tableau."
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "That last fact is the bridge between the two halves of this page. Row insertion and jeu de taquin look like unrelated procedures, one building tableaux from words and the other sliding tableaux around, but they compute the same thing: the insertion tableau of a word is an invariant that slides preserve, and rectification is one way to reach it. Words with the same insertion tableau are called Knuth equivalent, and this equivalence is the combinatorial heart of the theory of symmetric functions and of the representation theory of the symmetric group.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "That last fact is the bridge between the two halves of this page. Row insertion and jeu de taquin look like unrelated procedures, one building tableaux from words and the other sliding tableaux around, but they compute the same thing: the insertion tableau of a word is an invariant that slides preserve, and rectification is one way to reach it. Words with the same insertion tableau are called "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Knuth equivalent"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ", and this equivalence is the combinatorial heart of the theory of symmetric functions and of the representation theory of the symmetric group."
+      }
+    ]
+  },
+  {
+    "kind": "heading",
+    "text": "Where to go next",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Where to go next"
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "William Fulton's Young Tableaux is the classic short book and covers everything here in its first two chapters. Richard Stanley's Enumerative Combinatorics, Volume 2, chapter 7, is the standard reference for RSK and its consequences. For the probability story, search for \"longest increasing subsequence\" and \"Baik–Deift–Johansson\".",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": "William Fulton's "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Young Tableaux"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": " is the classic short book and covers everything here in its first two chapters. Richard Stanley's "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "1f2937",
+        "text": "Enumerative Combinatorics, Volume 2"
+      },
+      {
+        "weight": 400,
+        "italic": false,
+        "mono": false,
+        "color": "1f2937",
+        "text": ", chapter 7, is the standard reference for RSK and its consequences. For the probability story, search for \"longest increasing subsequence\" and \"Baik–Deift–Johansson\"."
+      }
+    ]
+  },
+  {
+    "kind": "paragraph",
+    "text": "About the interactives: each one is a Dragology draggable, a function from state to picture with drag specs attached. The bumping cascade in §3 is d.between interpolating two renderings; the strip in §4 is a reorderable list with floating; the chained slides in §5 are the same idiom as a sliding-block puzzle, with the legal moves filtered by the tableau rules.",
+    "runs": [
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "6b7280",
+        "text": "About the interactives: each one is a Dragology draggable, a function from state to picture with drag specs attached. The bumping cascade in §3 is "
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": true,
+        "color": "6b7280",
+        "text": "d.between"
+      },
+      {
+        "weight": 400,
+        "italic": true,
+        "mono": false,
+        "color": "6b7280",
+        "text": " interpolating two renderings; the strip in §4 is a reorderable list with floating; the chained slides in §5 are the same idiom as a sliding-block puzzle, with the legal moves filtered by the tableau rules."
+      }
+    ]
+  }
+]

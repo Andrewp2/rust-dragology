@@ -1,0 +1,1306 @@
+{
+  "linear-track": {
+    "source": "src/demos/linear-track.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "linear-track-chained": {
+    "source": "src/demos/linear-track-chained.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "simple-triangle": {
+    "source": "src/demos/simple-triangle.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "An interface with three states, using different drag specs built on these states.",
+        "source": "src/demos/simple-triangle.tsx:94",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "simplest-clicker": {
+    "source": "src/demos/simplest-clicker.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "click-and-drag": {
+    "source": "src/demos/click-and-drag.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "drag-to-copy": {
+    "source": "src/demos/drag-to-copy.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Drag to duplicate. Double click to remove.",
+        "source": "src/demos/drag-to-copy.tsx:66",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "alt-to-copy": {
+    "source": "src/demos/alt-to-copy.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Hold **Alt/Option** while dragging to duplicate a dot. You can toggle Alt mid-drag. (Test out our [release timeout](<https://tldraw.dev/blog/adding-delays-to-modifier-keys>)!)",
+        "source": "src/demos/alt-to-copy.tsx:73",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "twisted-trees": {
+    "source": "src/demos/twisted-trees/index.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Featuring multi-drag from [Elliot Evans](<https://elliot.website/>).",
+        "source": "src/demos/twisted-trees/index.tsx:715",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "perm": {
+    "source": "src/demos/perm.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "perm-floating": {
+    "source": "src/demos/perm-floating.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "perm-double": {
+    "source": "src/demos/perm-double.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "lists-2d": {
+    "source": "src/demos/lists-2d.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Uses `floating`.",
+        "source": "src/demos/lists-2d.tsx:165",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "lists-2d-sizes": {
+    "source": "src/demos/lists-2d-sizes.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Uses `floating`.",
+        "source": "src/demos/lists-2d-sizes.tsx:169",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "canvas-of-lists": {
+    "source": "src/demos/canvas-of-lists.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Uses `floating`, with a `vary` backdrop.",
+        "source": "src/demos/canvas-of-lists.tsx:199",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "lists-in-lists": {
+    "source": "src/demos/lists-in-lists.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Like canvas of lists, but with recursively nested rows. Tiles and rows can be dragged between any level.",
+        "source": "src/demos/lists-in-lists.tsx:255",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "lists-in-lists-vanilla": {
+    "source": "src/demos/lists-in-lists-vanilla.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "From-scratch React reimplementation of lists-in-lists, **without using Dragology**.",
+        "source": "src/demos/lists-in-lists-vanilla.tsx:501",
+        "context": "intro",
+        "unresolved": [],
+        "native_markdown": "Native port of the source’s imperative lists-in-lists comparison. It keeps the layout fixed during dragging and shows the floating item with an insertion indicator."
+      },
+      {
+        "markdown": "*Claude reports...* Differences from the library version:\n\n- The library shows the item snapping between candidate positions (via floating + closest); the vanilla version shows it floating at the pointer with a drop indicator\n- No spring animations on drop\n- No smooth transition between \"insert into existing row\" and \"create new row\" modes",
+        "source": "src/demos/lists-in-lists-vanilla.tsx:542",
+        "context": "intro",
+        "unresolved": [],
+        "native_markdown": "Differences from the library version:\n\n- The library shows the item snapping between candidate positions (via floating + closest); the vanilla version shows it floating at the pointer with a drop indicator.\n- No spring animations on drop.\n- No smooth transition between ‘insert into existing row’ and ‘create new row’ modes."
+      }
+    ]
+  },
+  "two-kinds-of-tree": {
+    "source": "src/demos/two-kinds-of-tree.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "kanban": {
+    "source": "src/demos/kanban.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "ring-of-beads": {
+    "source": "src/demos/ring-of-beads.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "insert-and-remove": {
+    "source": "src/demos/insert-and-remove.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Here, we use d.switchToStateAndFollow for pulling tiles off the toolbar and d.dropTarget for dropping them into the trash.",
+        "source": "src/demos/insert-and-remove.tsx:171",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "insert-and-remove-original": {
+    "source": "src/demos/insert-and-remove-original.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "This shows how we originally supported creating and removing tiles: by representing pre-creation and post-deletion tiles in the state, It's more committed to \"object permanence\" than our newer approach, which is kinda interesting.",
+        "source": "src/demos/insert-and-remove-original.tsx:184",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "tiles": {
+    "source": "src/demos/tiles.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "I'm trying to make dragging feel right here. Goal is for the tile to only drag orthogonally, AND to not jump discontinuously. This seems to require 'Relative Pointer Motion' mode (or divergent approaches).",
+        "source": "src/demos/tiles.tsx:107",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "grid-poly": {
+    "source": "src/demos/grid-poly.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "grid-poly-vary": {
+    "source": "src/demos/grid-poly-vary.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Re-implementation of grid-poly in a somewhat more traditional way:\n\n1. `d.vary` lets x & y be dragged freely.\n2. `spec.during` keeps the dragged point inside the grid.\n3. `spec.onDrop` rounds the point to the nearest grid point on drop.\n4. `spec.withSnapRadius` works on top of all of this – which is kinda cool because we never enumerate the drop locations!\n\nBut note that we don't stop points from colliding, which grid-poly does.",
+        "source": "src/demos/grid-poly-vary.tsx:84",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "animate-algebra-tree": {
+    "source": "src/demos/animate-algebra/tree.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "animate-algebra-stage-builder": {
+    "source": "src/demos/animate-algebra/stage-builder.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "animate-algebra-tree-macro": {
+    "source": "src/demos/animate-algebra/tree-macro.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "graspable-math": {
+    "source": "src/demos/graspable-math.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Solve for *x* by dragging, after [Graspable Math](<https://graspablemath.com>). Drag a term along its side to reorder it, or across the **=** to subtract it from both sides. Drag a factor across to divide (or, from under a fraction bar, multiply) the other side. Drop a term on a like term to add them, a number on a number to multiply them, a factor on a parenthesized sum to multiply it out (grab a sum by its parentheses), a power on a power of the same base to add exponents, or a factor on its match across a fraction bar to cancel.\n\nDrop an exponent on its base to work it out or write it as a product, drag it across the **=** to take a root, or drag it out of a log to the front. Drag the base of a power across to take a log, the base of a log across to exponentiate, or drop a log's base on its argument to work it out.",
+        "source": "src/demos/graspable-math.tsx:1503",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "outline": {
+    "source": "src/demos/outline.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "braid-old": {
+    "source": "src/demos/braid-old.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "todo": {
+    "source": "src/demos/todo.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "text-box": {
+    "source": "src/demos/text-box.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "carousel": {
+    "source": "src/demos/carousel.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Partially-AI-generated carousel with swipe navigation, interactive dots, and arrow buttons. Ought to use clipPaths but those don't work yet.",
+        "source": "src/demos/carousel.tsx:149",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "rush-hour": {
+    "source": "src/demos/rush-hour.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "fifteen": {
+    "source": "src/demos/fifteen.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Weird experiment: I made the blank draggable",
+        "source": "src/demos/fifteen.tsx:121",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "hanoi": {
+    "source": "src/demos/hanoi.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Uses `floating`. Only top disks can be dragged.",
+        "source": "src/demos/hanoi.tsx:143",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "sokoban": {
+    "source": "src/demos/sokoban.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "spinny": {
+    "source": "src/demos/spinny.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Tests interpolation of rotations.",
+        "source": "src/demos/spinny.tsx:84",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "scheduler": {
+    "source": "src/demos/scheduler.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "graph": {
+    "source": "src/demos/graph.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Hold **Alt/Option** while dragging to make a new connection.",
+        "source": "src/demos/graph.tsx:320",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "tromino": {
+    "source": "src/demos/tromino.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Inspired by a [neat Reddit post](<https://www.reddit.com/r/math/comments/gpxwl4/animated_golombs_ltromino_tiling/>).",
+        "source": "src/demos/tromino.tsx:230",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "angle": {
+    "source": "src/demos/angle.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "angle-via-transform": {
+    "source": "src/demos/angle-via-transform.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "bezier": {
+    "source": "src/demos/bezier.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Drag the endpoints (red) or control points (yellow) orrrrr the curve (??). – [Orion Reed](<https://www.orionreed.com/>)",
+        "source": "src/demos/bezier.tsx:209",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "face-creator": {
+    "source": "src/demos/face-creator.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Drag eyes to move/space them. Drag the mouth curve or endpoints. Drag the face outline to reshape. Features push each other.",
+        "source": "src/demos/face-creator.tsx:768",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "rectangle": {
+    "source": "src/demos/rectangle.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Your basic move-and-resize rectangle. Implementation is a little funky though: Every resize handle controls all four parameters (x, y, w, h), but with appropriate `pin` constraints to control its effects.",
+        "source": "src/demos/rectangle.tsx:270",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "stretchy-xy": {
+    "source": "src/demos/stretchy-xy.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "stretchy-rot": {
+    "source": "src/demos/stretchy-rot.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "clock": {
+    "source": "src/demos/clock.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "dragon": {
+    "source": "src/demos/dragon.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Adapted from [g9's famous example](<https://omrelli.ug/g9/>). Nice performance stress test.",
+        "source": "src/demos/dragon.tsx:114",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "scene-3d": {
+    "source": "src/demos/scene-3d.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "orbiting-planet": {
+    "source": "src/demos/orbiting-planet.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "orbiting-planet-with-background": {
+    "source": "src/demos/orbiting-planet-with-background.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "constrained-slider": {
+    "source": "src/demos/constrained-slider.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "point-in-circle": {
+    "source": "src/demos/point-in-circle.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "point-in-polygon": {
+    "source": "src/demos/point-in-polygon.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "point-on-circle-via-constraint": {
+    "source": "src/demos/point-on-circle-via-constraint.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "This demo parameterizes a point's position using x and y coordinates and then constrains it to be on the circle using an `equal` constraint. (You could alternatively parameterize it with an angle, in which case you wouldn't need constraints)",
+        "source": "src/demos/point-on-circle-via-constraint.tsx:47",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "point-on-curve": {
+    "source": "src/demos/point-on-curve.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Point constrained to a [Cassini oval](<https://en.wikipedia.org/wiki/Cassini_oval>) (a=1.1, c=1) using an `equal` constraint on the product of distances to two foci. (The visible curve is plotted using a polar parameterization, which kind of ruins the fun of using the constraint solver here.)",
+        "source": "src/demos/point-on-curve.tsx:77",
+        "context": "intro",
+        "unresolved": []
+      },
+      {
+        "markdown": "Note a strange asymmetry when dragging from the upper concavity to the lower concavity and back again.",
+        "source": "src/demos/point-on-curve.tsx:87",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "multi-circle-points": {
+    "source": "src/demos/multi-circle-points.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "multi-circle-points-vanilla": {
+    "source": "src/demos/multi-circle-points-vanilla.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "From-scratch React reimplementation of multi-circle-points, **without using Dragology**.",
+        "source": "src/demos/multi-circle-points-vanilla.tsx:244",
+        "context": "intro",
+        "unresolved": [],
+        "native_markdown": "From-scratch Rust reimplementation of multi-circle-points, **without using Dragology**."
+      }
+    ]
+  },
+  "chain-of-links": {
+    "source": "src/demos/chain-of-links.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Uses `vary` to move the dragged dot, `during` to update the rest of the chain, and (subtle part!) `withChaining` so that the result of the rest-of-chain update is fed back into the next frame. (If you don't do this, you're always simulating drags from the drag-start state; you need to bring in hysteresis somehow!)",
+        "source": "src/demos/chain-of-links.tsx:141",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "robot-arm": {
+    "source": "src/demos/robot-arm.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Inverse kinematics with `d.vary`. Each link is rotated inside the one before it, and grabbing a link varies the angles of every joint between it and the shoulder. Joint limits and \"don't go through the floor\" are `constraint`s. Slide the base along its rail. Let go with the claw near a ball to grab it; let go over the bin (or down by the floor) to drop it.",
+        "source": "src/demos/robot-arm.tsx:465",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "nodes-and-noodles": {
+    "source": "src/demos/nodes-and-noodles.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "sprouting-tree": {
+    "source": "src/demos/sprouting-tree.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "weird-floating-vs-fixed": {
+    "source": "src/demos/weird-floating-vs-fixed.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "snap-to-islands": {
+    "source": "src/demos/snap-to-islands.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "The (second) simplest possible demonstration of \"discrete islands in a continuous sea\", aka `spec.whenFar(d.vary(...))`. Once used to test some misbehaving float positioning.",
+        "source": "src/demos/snap-to-islands.tsx:59",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "snap-to-islands-in-out": {
+    "source": "src/demos/snap-to-islands-in-out.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Like snap-to-islands, but with no floating and asymmetric gapIn/gapOut (gapIn=40, gapOut=80).",
+        "source": "src/demos/snap-to-islands-in-out.tsx:45",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "magnetic-targets": {
+    "source": "src/demos/magnetic-targets.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "`changeGap` reweights gaps going into a `d.closest`, resulting in some funny drop zones. (Take a look with the \"Drop zones\" viewer!)",
+        "source": "src/demos/magnetic-targets.tsx:64",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "bluefish-static": {
+    "source": "src/demos/bluefish/static.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Not interactive — just renders a static Bluefish diagram as SVG.",
+        "source": "src/demos/bluefish/static.tsx:54",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "bluefish-perm": {
+    "source": "src/demos/bluefish/perm.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "This one is interactive!",
+        "source": "src/demos/bluefish/perm.tsx:75",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "bluefish-lists-2d-sizes": {
+    "source": "src/demos/bluefish/lists-2d-sizes.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Like lists-2d-sizes, but with Bluefish handling layout.",
+        "source": "src/demos/bluefish/lists-2d-sizes.tsx:170",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "emerge-from": {
+    "source": "src/demos/emerge-from.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "drag-spec-designer": {
+    "source": "src/demos/drag-spec-designer.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "floating-dynamic-switch": {
+    "source": "src/demos/floating-dynamic-switch.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "card-piles": {
+    "source": "src/demos/card-piles.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Drag cards to move them. Overlapping cards form piles. Drag the grey background to move a whole pile.",
+        "source": "src/demos/card-piles.tsx:200",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "tactile-tessellations": {
+    "source": "src/demos/tactile-tessellations.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "gears": {
+    "source": "src/demos/gears.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Drag edge to spin, center to move. Gear connection logic is WIP.",
+        "source": "src/demos/gears.tsx:224",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "switch-with-sharpness": {
+    "source": "src/demos/switch-with-sharpness.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "study-switch": {
+    "source": "src/demos/study-switch.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "study-switch-clickable": {
+    "source": "src/demos/study-switch-clickable.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Same as study-slider, but it's clickable.",
+        "source": "src/demos/study-switch-clickable.tsx:52",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "study-three-way-switch": {
+    "source": "src/demos/study-three-way-switch.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "study-reorderable-list": {
+    "source": "src/demos/study-reorderable-list.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "study-slider": {
+    "source": "src/demos/study-slider.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "study-rotary-dial": {
+    "source": "src/demos/study-rotary-dial.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "study-timeline": {
+    "source": "src/demos/study-timeline.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "study-timeline-substate": {
+    "source": "src/demos/study-timeline-substate.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "An approach to the \"Timeline\" study task using the experimental `d.substate` operator, which lets you write a drag-spec for a particular piece of the state so you don't need to keep drilling down repetitively.",
+        "source": "src/demos/study-timeline-substate.tsx:96",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "study-timeline-embed": {
+    "source": "src/demos/study-timeline-embed.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "An approach to the \"Timeline\" study task using the experimental `embed()` operator, which lets you embed a sub-draggable within a parent draggable. Here, the timelineDraggable embeds a bunch of blockDraggables.",
+        "source": "src/demos/study-timeline-embed.tsx:96",
+        "context": "intro",
+        "unresolved": [],
+        "native_markdown": "An approach to the \"Timeline\" study task using embedded block renderers and drag specifications within a parent timeline. The upstream version demonstrates its experimental `embed()` operator; this port uses reusable block helpers and Rust `substate` lifting."
+      }
+    ]
+  },
+  "error-study-reorderable-list": {
+    "source": "src/demos/error-study-reorderable-list.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "This tests the \"coincident targets detected\" error (because `id` is missing).",
+        "source": "src/demos/error-study-reorderable-list.tsx:54",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "linked-sliders": {
+    "source": "src/demos/linked-sliders.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Contrived demo of `d.varyFunc`: each slider controls itself & all lower sliders. They're constrained to the tracks.",
+        "source": "src/demos/linked-sliders.tsx:90",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "lerping-keys": {
+    "source": "src/demos/lerping-keys.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Drag the knob; it transitions between notches via `d.between`. Both rows below show dots to the right of the knob. Without `dragologyKey`, children are keyed by position — so as one dot disappears, the rest shift and lerp through each other's colors. With `dragologyKey`, each dot is matched by its key and fades in/out in place.",
+        "source": "src/demos/lerping-keys.tsx:94",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "lerping-text": {
+    "source": "src/demos/lerping-text.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Drag the mark around the triangle. Its position blends between the corners, but its label is text, which can't be blended, so it shows the nearest corner's letter.",
+        "source": "src/demos/lerping-text.tsx:72",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "between-with-vary": {
+    "source": "src/demos/between-with-vary.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "This demonstrates using `d.between` with a drag spec (`d.vary`) inside it. It's pretty weird!",
+        "source": "src/demos/between-with-vary.tsx:97",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "stickiness": {
+    "source": "src/demos/stickiness.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Stickiness adds a bias toward the current branch in a `closest`, making it resist switching until the pointer is clearly closer to another option.",
+        "source": "src/demos/stickiness.tsx:63",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "lock-past": {
+    "source": "src/demos/lock-past.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "A `closest` of `between`s, one per spoke. Without `lockPast`, a drag partway out one spoke can jump onto a neighboring spoke. With it, once the dot is more than `lockPast` pixels from the hub, it stays on its spoke until it comes back.",
+        "source": "src/demos/lock-past.tsx:75",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "controlled": {
+    "source": "src/demos/controlled.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "A normal use-case – the parent accepts changes from the draggable, but also makes its own changes.",
+        "source": "src/demos/controlled.tsx:82",
+        "context": "specimen",
+        "title": "simple",
+        "unresolved": []
+      },
+      {
+        "markdown": "Two draggable components controlled by the same state.",
+        "source": "src/demos/controlled.tsx:116",
+        "context": "specimen",
+        "title": "double switch",
+        "unresolved": []
+      },
+      {
+        "markdown": "Here the parent only accepts changes to \"true\".",
+        "source": "src/demos/controlled.tsx:153",
+        "context": "specimen",
+        "title": "rejection",
+        "unresolved": []
+      },
+      {
+        "markdown": "Here the parent interprets all changes as the opposite of what the draggable asks for.",
+        "source": "src/demos/controlled.tsx:175",
+        "context": "specimen",
+        "title": "override",
+        "unresolved": []
+      },
+      {
+        "markdown": "Two draggable components controlled by the same state.",
+        "source": "src/demos/controlled.tsx:196",
+        "context": "specimen",
+        "title": "double slider",
+        "unresolved": []
+      },
+      {
+        "markdown": "An HTML slider controls the draggable's definition. The draggable itself has no state – it changes because a new draggable is passed in. The draggable should update without a transition.",
+        "source": "src/demos/controlled.tsx:229",
+        "context": "specimen",
+        "title": "external control",
+        "unresolved": []
+      },
+      {
+        "markdown": "A few simple tests of using `<DraggableRenderer>` as a *controlled component* – its React parent ultimately controls its state. (Also, as a lightweight check, this file imports dependencies from `lib.ts`.)",
+        "source": "src/demos/controlled.tsx:257",
+        "context": "intro",
+        "unresolved": [],
+        "native_markdown": "A few simple tests of using a draggable as a *controlled component* — its parent ultimately controls its state. The two columns compare updates on drop with updates throughout dragging."
+      }
+    ]
+  },
+  "simple-triangle-custom": {
+    "source": "src/demos/simple-triangle-custom.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Reproduces the `d.closest(states)` simple-triangle demo using only `d.custom`.",
+        "source": "src/demos/simple-triangle-custom.tsx:83",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "with-pointer-delay": {
+    "source": "src/demos/with-pointer-delay.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Demonstration of defining a new modifier outside the library, with its public API: `pointerDelay` lags the pointer before feeding it to the spec it wraps. It's a `Modifier` subclass, turned into a helper by `modifier(...)` and attached with `.with(pointerDelay(ms))`. It also draws itself in the debug tree view and overlay (the overlay shows the buffered pointer positions). (This reveals a current framework limitation: you can't keep running a behavior after drop.)",
+        "source": "src/demos/with-pointer-delay.tsx:114",
+        "context": "intro",
+        "unresolved": [],
+        "native_markdown": "`pointerDelay` lags the pointer before feeding it to the wrapped spec. This port schedules delayed samples in the native host. Release preserves the last delayed position: the behavior cannot continue after drop. The upstream custom-modifier example additionally supplies a debug tree view and an overlay of buffered pointer positions; those debug views are not yet present here."
+      }
+    ]
+  },
+  "change-frame": {
+    "source": "src/demos/change-frame.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "`spec.changeFrame` changes the frame a spec is given. Here a `d.vary` moving a point around a circle is given the pointer flipped upside down, so the point follows the cursor's reflection. Turn on the Overlay to see the flipped pointer, which is the one `vary` measures its gap to.",
+        "source": "src/demos/change-frame.tsx:43",
+        "context": "intro",
+        "unresolved": [],
+        "native_markdown": "`spec.changeFrame` changes the frame a spec is given. Here a `d.vary` moving a point around a circle is given the pointer flipped upside down, so the point follows the cursor’s reflection. The source debug Overlay also shows the flipped pointer that `vary` measures its gap to; that overlay is not yet present in this port."
+      }
+    ]
+  },
+  "component-elements": {
+    "source": "src/demos/component-elements.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Each card holds a real React component, `<NoteWidget>`, with its own hooks: a counter and a note in `useState`, and an accent color read with `useContext` from outside the draggable. Dragology never calls component elements themselves. It mounts them once and keeps them mounted, so component-element state survives dragging and reordering the cards.\n\nPointer events in the widget bubble to the card's `dragologyOnDrag` as usual, so you can drag a card by its widget. The button and the input stop propagation, so they work as controls instead.",
+        "source": "src/demos/component-elements.tsx:111",
+        "context": "intro",
+        "unresolved": [],
+        "native_markdown": "Each card holds a component with its own counter, editable note and mount time, plus an accent color supplied from outside the draggable. The components stay mounted so their local state survives dragging and reordering.\n\nPointer events in the widget bubble to the card’s drag handler, so you can drag a card by its widget. The button and input stop propagation so they work as controls instead."
+      }
+    ]
+  },
+  "component-elements-lerp": {
+    "source": "src/demos/component-elements-lerp.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Both charts are the same React component, `<BarChart>`, with its own state: click a bar to select it. Drag the knob. Mid-drag, Dragology draws a blend of states, and the left chart has `dragologyLerpProps={[\"data\", \"color\"]}`, so its props are blended too. The right chart isn't blended: it shows the nearest preset. On drop, the knob and the left chart's bars overshoot and settle.",
+        "source": "src/demos/component-elements-lerp.tsx:113",
+        "context": "intro",
+        "unresolved": [],
+        "native_markdown": "Both charts use the same component with independent local state: click a bar to select it. Drag the knob. Mid-drag, the left chart’s data and color are blended, corresponding to the upstream `dragologyLerpProps` annotation. The right chart isn’t blended: it shows the nearest preset. On drop, the knob and the left chart’s bars overshoot and settle."
+      }
+    ]
+  },
+  "proof-by-dragging": {
+    "source": "src/demos/proof-by-dragging/index.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Proof by dragging, after [Actema](<https://www.actema.xyz/>) and Chaudhuri's *subformula linking*. Each row is a sequent: hypotheses ⊢ goal. **Drag a hypothesis or the goal onto a matching subformula of opposite polarity** (targets light up blue) to link them: the goal (or hypothesis) rewrites, and any new obligations emerge in place. The link happens as soon as you reach the target, and you come away holding what it rewrote, so you can keep going: drag *p* over *p → q* and you're now dragging *q*; if the link finishes the sequent, that's done too. Click a highlighted root connective to split a conjunction, introduce an implication, or case on a disjunction. The proof is done when no sequents remain.",
+        "source": "src/demos/proof-by-dragging/index.tsx:447",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "regex-nfa-sync": {
+    "source": "src/demos/regex-nfa/sync.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Drag AST boxes to reorder them or move them into/out of groups; drag letters and **\\*** from the palette onto the tree; drag a **\\*** badge to another box to move the star, or to the trash to unwrap. The NFA below is re-derived from the tree on every drag.",
+        "source": "src/demos/regex-nfa/sync.tsx:869",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "gantt": {
+    "source": "src/demos/gantt.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "A Gantt chart with dependencies. Start times are never stored: each task starts when its prerequisites are done, plus an optional lag (shown as a dotted lead-in). Drag a bar to change its lag; everything downstream moves with it. Drag the right edge to change duration. Drop a bar onto another task to make that task a prerequisite (targets that would create a cycle are dimmed). Drag the grip on the left to move between resource lanes. Click an arrow to remove it. The critical path is highlighted in red and updates live; grey numbers show slack.",
+        "source": "src/demos/gantt.tsx:515",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "tableaux": {
+    "source": "src/demos/tableaux.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": []
+  },
+  "layout-editor": {
+    "source": "src/demos/layout-editor.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "A layout editor for a CSS-like flex/grid model. The layout engine is the render function, so every edit reflows the whole tree. Drag a colored leaf or a dashed box to move it between containers or reorder it. Drag a leaf's corner to resize it. Each box has handles: the circled arrow on its edge switches direction (right edge = row, bottom = column, corner = grid); the small tick in the first gap adjusts the gap; the corner bracket adjusts padding; grids have a dot after the first row to change the column count. Alongside, the same layout as HTML and CSS, rendered by the browser.",
+        "source": "src/demos/layout-editor.tsx:678",
+        "context": "intro",
+        "unresolved": [],
+        "native_markdown": "A layout editor for a CSS-like flex/grid model. The layout engine is the render function, so every edit reflows the whole tree. Drag a colored leaf or a dashed box to move it between containers or reorder it. Drag a leaf's corner to resize it. Each box has handles: the circled arrow on its edge switches direction (right edge = row, bottom = column, corner = grid); the small tick in the first gap adjusts the gap; the corner bracket adjusts padding; grids have a dot after the first row to change the column count. Alongside are the generated HTML and CSS and a native preview of this flex/grid subset. The upstream version renders that preview in the browser."
+      }
+    ]
+  },
+  "zx-string-diagram": {
+    "source": "src/demos/zx-string-diagram.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "**⚠️ Just a seed!**\n\nA ZX-calculus string diagram editor where every drag is a rewrite rule. **Drag spiders** past each other (interchange), **drop** one on an adjacent same-colored spider (fusion; a bare phase-0 spider drops on any neighbor: identity), **Alt-drag** out of a spider (unfusion), **drag a phase label** onto a same-colored neighbor, **drag a wire's bead** sideways (and through a twin wire: Hopf), and **drag a cup past its cap** (snake).",
+        "source": "src/demos/zx-string-diagram.tsx:1222",
+        "context": "intro",
+        "unresolved": []
+      },
+      {
+        "markdown": "Two CNOTs in a row cancel. Fuse the Zs, fuse the Xs, then grab the bead on one of the twin wires and pull it across the other wire (Hopf: they cancel). Finally drop each bare spider on a neighbor.",
+        "source": "src/demos/zx-string-diagram.tsx:1179",
+        "context": "specimen",
+        "title": "CNOT · CNOT = 1",
+        "selector": "puzzleId=cnot2",
+        "unresolved": []
+      },
+      {
+        "markdown": "A Z-phase slides through a CNOT's control. Fuse it into the control, Alt-drag a fresh spider out toward the bottom-left (legs follow the side you pull toward, so only the output goes with it), then drag the phase label down onto it.",
+        "source": "src/demos/zx-string-diagram.tsx:1188",
+        "context": "specimen",
+        "title": "Phase through CNOT",
+        "selector": "puzzleId=phase",
+        "unresolved": []
+      },
+      {
+        "markdown": "Two π/4 spiders sit on a zigzag wire. Drag the cup up past the cap to yank it straight, then fuse.",
+        "source": "src/demos/zx-string-diagram.tsx:1198",
+        "context": "specimen",
+        "title": "Spider on a snake",
+        "selector": "puzzleId=snake",
+        "unresolved": []
+      },
+      {
+        "markdown": "No goal – three independent strands to poke at.",
+        "source": "src/demos/zx-string-diagram.tsx:1205",
+        "context": "specimen",
+        "title": "Playground",
+        "selector": "puzzleId=playground",
+        "unresolved": []
+      }
+    ]
+  },
+  "frobenius-algebra": {
+    "source": "src/demos/frobenius-algebra.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "**⚠️ Just a seed!**\n\nString diagrams for a (non-commutative) Frobenius algebra, where every drag is an axiom. **Drag generators** past unrelated ones (interchange), **slide a μ across the μ it feeds** (associativity; dually for δ), **drop a unit on its μ** or a counit on its δ (unit laws), and **drag the δ of a μ–δ pair past the μ** (Frobenius law).",
+        "source": "src/demos/frobenius-algebra.tsx:1186",
+        "context": "intro",
+        "unresolved": []
+      },
+      {
+        "markdown": "Drop the unit η onto the μ it feeds (or the μ onto it): both vanish. Try sliding the upper μ across the lower one first, for associativity.",
+        "source": "src/demos/frobenius-algebra.tsx:1125",
+        "context": "specimen",
+        "title": "(1·a)·b = a·b",
+        "selector": "puzzleId=unit",
+        "unresolved": []
+      },
+      {
+        "markdown": "Slide the upper μ sideways across the lower μ (associativity), and the lower δ across the upper δ (coassociativity).",
+        "source": "src/demos/frobenius-algebra.tsx:1133",
+        "context": "specimen",
+        "title": "Reassociate",
+        "selector": "puzzleId=assoc",
+        "unresolved": []
+      },
+      {
+        "markdown": "Drag the δ up past the μ, crossing on its left. (Crossing on the right gives the other zigzag; dragging back down restores δ∘μ.)",
+        "source": "src/demos/frobenius-algebra.tsx:1141",
+        "context": "specimen",
+        "title": "Frobenius law",
+        "selector": "puzzleId=frobenius",
+        "unresolved": []
+      },
+      {
+        "markdown": "A cup (δ∘η) and a cap (ε∘μ) make a zigzag. Drag the δ down past the μ (Frobenius), then drop the unit on the μ and the counit on the δ.",
+        "source": "src/demos/frobenius-algebra.tsx:1149",
+        "context": "specimen",
+        "title": "Snake",
+        "selector": "puzzleId=snake",
+        "unresolved": []
+      },
+      {
+        "markdown": "Two zigzags in a row. Straighten both.",
+        "source": "src/demos/frobenius-algebra.tsx:1156",
+        "context": "specimen",
+        "title": "Double snake",
+        "selector": "puzzleId=double-snake",
+        "unresolved": []
+      },
+      {
+        "markdown": "No goal – poke at the generators.",
+        "source": "src/demos/frobenius-algebra.tsx:1162",
+        "context": "specimen",
+        "title": "Playground",
+        "selector": "puzzleId=playground",
+        "unresolved": []
+      }
+    ]
+  },
+  "frobenius-tangle": {
+    "source": "src/demos/frobenius-tangle.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "**⚠️ Just a seed!**\n\nString diagrams for a commutative Frobenius algebra, flowing left to right: **μ** (hollow) merges two wires, **δ** (solid) splits one. **Drag** nodes around freely; **click** a node to swap its two inputs or outputs (commutativity); **drop a μ on the μ it feeds** to reassociate (likewise δ); **drop a μ on a δ** it's wired to, or vice versa, for the Frobenius law (from δ∘μ, come in from above or below to pick which zigzag).",
+        "source": "src/demos/frobenius-tangle.tsx:961",
+        "context": "intro",
+        "unresolved": []
+      },
+      {
+        "markdown": "The zigzag form of the Frobenius law. Drop the μ (hollow) onto the δ (solid), or the δ onto the μ, to get δ∘μ.",
+        "source": "src/demos/frobenius-tangle.tsx:912",
+        "context": "specimen",
+        "title": "Frobenius",
+        "selector": "puzzleId=frobenius",
+        "unresolved": []
+      },
+      {
+        "markdown": "Two splits whose strands cross over to two merges: one loop. Untangle it into a merge, a handle, and a split.",
+        "source": "src/demos/frobenius-tangle.tsx:919",
+        "context": "specimen",
+        "title": "Cross",
+        "selector": "puzzleId=cross",
+        "unresolved": []
+      },
+      {
+        "markdown": "One wire splits into four strands that cross and merge back: three loops. Pull it out into a chain of three handles.",
+        "source": "src/demos/frobenius-tangle.tsx:926",
+        "context": "specimen",
+        "title": "Weave",
+        "selector": "puzzleId=weave",
+        "unresolved": []
+      },
+      {
+        "markdown": "Nine nodes woven into a lattice, with four loops.",
+        "source": "src/demos/frobenius-tangle.tsx:932",
+        "context": "specimen",
+        "title": "Lattice",
+        "selector": "puzzleId=lattice",
+        "unresolved": []
+      },
+      {
+        "markdown": "Three strands, split and re-merged with their neighbors twice over: four loops, three in, three out.",
+        "source": "src/demos/frobenius-tangle.tsx:938",
+        "context": "specimen",
+        "title": "Braid",
+        "selector": "puzzleId=braid",
+        "unresolved": []
+      }
+    ]
+  },
+  "git-graph-surgery": {
+    "source": "src/demos/git-graph-surgery.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "A commit graph you can rewrite by dragging. **Drag a commit** onto another commit to rebase it (and everything downstream) there: the chain lifts, re-parents, and gets fresh hashes, while the old commits ghost out. Drag it up or down within its own chain to reorder (interactive rebase). Hold **Alt/Option** while dragging to cherry-pick a copy onto a branch instead. **Drag a branch label** to move the ref; commits it abandons ghost out. Ghosts are swept away by the next operation.",
+        "source": "src/demos/git-graph-surgery.tsx:489",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "lambda-beta": {
+    "source": "src/demos/lambda/beta.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "**⚠️ Just a seed!**\n\nλ-terms as nested boxes. **β-reduce** by dragging an argument onto the binder (the *x* in *λx.*) of the λ it's applied to: as you go, each *x* in the body turns into a copy of the argument, and when you drop, the λ dissolves. Drag a subterm **rightward out** of an enclosing box to abstract over it (the reverse).",
+        "source": "src/demos/lambda/beta.tsx:338",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "pivot-table": {
+    "source": "src/demos/pivot-table.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "A pivot table. Drag field chips between *Rows*, *Columns*, *Values*, and the unused *Fields* pool, or reorder them within a zone. The table re-pivots live as a preview. Cells are keyed by their group (which dimension values they aggregate), so a cell keeps its identity — and glides to its new spot — when a dimension moves between Rows and Columns.",
+        "source": "src/demos/pivot-table.tsx:668",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "catalan-explorer": {
+    "source": "src/demos/catalan-explorer.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Six views of one Catalan object, all drawn from a single state. Drag a **diagonal** to flip it, drag a **tree node** up to rotate it, slide a **hump** of the Dyck path diagonally (a rotation moves a whole excursion past a down-step – the Tamari move, not a single peak flip) or its **arc** in the pairing, or slide a **parenthesis**. Every view animates the same move. Colors follow identity: each tree node shares its color with its triangle, its tile of the Dyck path, and its arc in the pairing. Below, the Tamari lattice: drag the ring along edges to walk the flip graph (left comb at the bottom, right comb at the top). With “Color lattice edges” on, edges are colored by which two operator slots the rotation re-associates – in Loday's associahedron these are exactly the parallel classes of edges. (These colors are unrelated to the ones above.)",
+        "source": "src/demos/catalan-explorer.tsx:1338",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "permutation-lab": {
+    "source": "src/demos/permutation-lab.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "One permutation, several notations, all in sync. Drag tiles in the bottom row of the two-line notation to reorder; switch to *adjacent only* and each step literally appends a generator to the word (the inversion count ticks; the word is reduced exactly when its length equals the inversion count). Drag a node in the cycle diagram into any cycle at any position. Drag a dot in the matrix within its column. Drag a crossing in the wiring diagram past its neighbor to commute them. In a braid sᵢsⱼsᵢ, drag the middle crossing vertically, or drag the strand that bends around it across it, to get sⱼsᵢsⱼ. Either way the word changes, π doesn't. Drag a straight bit of strand over its neighbor to write sᵢsᵢ; drag the apex of such a double crossing back to cancel it. The permutohedron (n ≤ 4) maps every permutation to a vertex, with edges for adjacent transpositions; drag the token along edges to walk (and write) a word. Push the walk across a face to rewrite the word the same ways: drag a corner across a square to commute, or the middle of three edges around a hexagon across it to braid; where the walk goes out along an edge and straight back, push the tip back to cancel the sᵢsᵢ. For n = 4 the permutohedron is a truncated octahedron: drag a face to turn it.",
+        "source": "src/demos/permutation-lab.tsx:1678",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "braid": {
+    "source": "src/demos/braid.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "One braid, as a diagram and as a word in the generators σᵢ, with its strands seen end-on alongside. Every drag on the diagram is a relation of the braid group, so the braid never changes; only its word does. Drag a crossing past a far-away neighbor to commute them. In a braid σᵢσⱼσᵢ (strands layered consistently), drag the middle crossing vertically, or drag the bypassing strand across it. Drag a straight bit of strand across its neighbor to pass in front of it and back (the strand you drag passes in front); drag the apex of such a pair back to cancel it. The apex of a *full twist* σᵢσᵢ won't budge: that is not the identity here. Hover over the diagram to see the strands as points moving in a plane, each crossing a half-turn of two points around each other. Add crossings at the end by turning a point around its neighbor, in front or behind.",
+        "source": "src/demos/braid.tsx:1798",
+        "context": "intro",
+        "unresolved": []
+      },
+      {
+        "markdown": "Close the braid up to see it as a link. Every drag on the diagram is then a Markov move or a relation, so the link never changes; only its braid does. Strands are colored by the component of the link they belong to. Drag the last crossing on around its loops and in at the front to conjugate (or the first one back around). Pull the bottom strand down at either end of the braid to stabilize, adding a strand, a loop, and a crossing at that end of the word, where the strand you pull passes in front. When the bottom strand crosses only once, at either end, pull the innermost loop back in to destabilize.",
+        "source": "src/demos/braid.tsx:1814",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "plane-partition": {
+    "source": "src/demos/plane-partition.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "A [plane partition](<https://en.wikipedia.org/wiki/Plane_partition>) is a stack of cubes in the corner of a box – and, seen flat, it is a lozenge tiling of a hexagon. Drag a corner cube to move it or to toss it in the spare pile; drag a spare cube into any inner corner. Each move is one \"flip\" of the tiling. See also [aztec-diamond](<#/demos/aztec-diamond>), the domino cousin of this demo.",
+        "source": "src/demos/plane-partition.tsx:419",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "aztec-diamond": {
+    "source": "src/demos/aztec-diamond.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Domino tilings of the [Aztec diamond](<https://en.wikipedia.org/wiki/Aztec_diamond>). Two parallel dominoes side by side form a 2×2 block; drag one of them to turn the block like a knob, either way and as far round as you like; let go and it settles to the nearest quarter turn. The numbers are Thurston's height function – each flip changes it at exactly one vertex. See also [plane-partition](<#/demos/plane-partition>), the lozenge cousin of this demo.",
+        "source": "src/demos/aztec-diamond.tsx:512",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "rotations-rebalancing": {
+    "source": "src/demos/rotations-rebalancing/index.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "Drag any non-root node **upward**. Each splay step (zig, zig-zig, zig-zag) is a `d.between` from the current tree to the tree one step later, with a chained snap radius, so a single drag to the root plays out as a sequence of rotations. Nodes are laid out by in-order rank, so rotations only move nodes vertically.",
+        "source": "src/demos/rotations-rebalancing/index.tsx:43",
+        "context": "specimen",
+        "title": "Splay tree",
+        "unresolved": []
+      },
+      {
+        "markdown": "Drag a key from the deck into the tree. The drop preview is the tree *after* insertion and rebalancing — rotations (and, for red-black, recolorings) included. Move the key away to cancel.",
+        "source": "src/demos/rotations-rebalancing/index.tsx:59",
+        "context": "specimen",
+        "title": "AVL / red-black tree",
+        "unresolved": []
+      },
+      {
+        "markdown": "Drag a key into a full leaf and watch the split propagate upward: the middle key is pushed into the parent, which may split in turn. Nodes created by splits use `dragologyEmergeFrom` to grow out of the node they split from.",
+        "source": "src/demos/rotations-rebalancing/index.tsx:72",
+        "context": "specimen",
+        "title": "2-3 tree",
+        "unresolved": []
+      },
+      {
+        "markdown": "Drag a value from the deck to append it to the heap, then drag it **up past its parent** to sift it up (each swap is a chained `d.between`). Drag a node down past its larger child to sift down. Drag the root into the tray to extract the max. The array view below stays in sync because it is the same state rendered twice.",
+        "source": "src/demos/rotations-rebalancing/index.tsx:87",
+        "context": "specimen",
+        "title": "Binary heap",
+        "unresolved": []
+      }
+    ]
+  },
+  "knot": {
+    "source": "src/demos/knot/index.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "**⚠️ Just a seed!**\n\nA knot diagram you can manipulate by [Reidemeister moves](<https://en.wikipedia.org/wiki/Reidemeister_move>). Each strand between two crossings is a single curve. Grab one by its middle: drag it onto a ring beside it to twist a loop (R1), push it across a neighboring strand (R2; hold `Alt` to pass under), or slide it across a crossing (R3; or drag the crossing across the strand). Drag a loop back into the strand or a bigon back across its partner to undo. Drag in other directions to bend the strand, or drag a crossing to move it. The Jones polynomial never changes; crossing number and writhe do. Tangle A is the [Culprit](<https://en.wikipedia.org/wiki/Hard_unknot>), an unknot that can't be simplified until you first make it worse. Tangle B is a trefoil in disguise.",
+        "source": "src/demos/knot/index.tsx:603",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  },
+  "stock-and-flow": {
+    "source": "src/demos/stock-and-flow/index.tsx",
+    "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+    "notes": [
+      {
+        "markdown": "A **stock-and-flow** editor. Stocks (boxes) accumulate; flows (pipes) fill and drain them, from and to clouds outside the model or between stocks; dashed links say what a flow’s rate depends on. A rate is its constant times one factor per link, and each link’s chip says which shape that factor has (click it to cycle: linear, threshold, gap, saturating, crowding, repression).\n\nDrag a stock’s side arrows to pull out a flow, its top dot to pull out a link onto a valve; drag a flow’s ends onto stocks or off into clouds; drag things to the trash to delete them. Drag sliders, the starting points of the curves, and the time cursor. Click a parameter’s name to see how the long-run behavior depends on it. Double-click names and values to edit them.",
+        "source": "src/demos/stock-and-flow/index.tsx:1632",
+        "context": "intro",
+        "unresolved": []
+      }
+    ]
+  }
+}

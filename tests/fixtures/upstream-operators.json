@@ -1,0 +1,2532 @@
+{
+  "revision": "b145bdd56530f7cfa9a61bf6a7170459d2f140e1",
+  "cases": [
+    {
+      "name": "fixed",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 100,
+          "path": "fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 79.62411694957754,
+          "path": "fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 17.11724276862369,
+          "path": "fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 50.00999900019995,
+          "path": "fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 54.009258465563114,
+          "path": "fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 117.2731853408954,
+          "path": "fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 99.02019995940222,
+          "path": "fixed",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "closest",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 27.202941017470888,
+          "path": "closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 17.11724276862369,
+          "path": "closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 50.00999900019995,
+          "path": "closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 46.01086828130937,
+          "path": "closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 117.2731853408954,
+          "path": "closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 2.23606797749979,
+          "path": "closest/0/fixed",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "sticky",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 27.202941017470888,
+          "path": "closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 17.11724276862369,
+          "path": "closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 50.00999900019995,
+          "path": "closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 54.009258465563114,
+          "path": "closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 117.2731853408954,
+          "path": "closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 2.23606797749979,
+          "path": "closest/0/fixed",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "locked",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "closest/0/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            24,
+            3
+          ],
+          "gap": 16,
+          "path": "closest/0/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            85,
+            3
+          ],
+          "gap": 2,
+          "path": "closest/0/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            52,
+            3
+          ],
+          "gap": 1,
+          "path": "closest/0/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            48,
+            3
+          ],
+          "gap": 1,
+          "path": "closest/0/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 117.27318534089538,
+          "path": "closest/0/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            5
+          ],
+          "gap": 1,
+          "path": "closest/1/between",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "between",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            24.000000000000004,
+            19
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            85,
+            5
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            52,
+            4
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            48,
+            4
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            72.5,
+            32.5
+          ],
+          "gap": 109.60155108391487,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            3.0000000000000027,
+            5
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "sharp",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            6.207498261364356,
+            4.618511727887716
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            101.41182606881445,
+            3.0013908931272493
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            53.51452709664125,
+            3.000412116216773
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            41.533089101350846,
+            3.0004061507469113
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            95.17360233995878,
+            9.82639766004122
+          ],
+          "gap": 109.60155108391487,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2.000109567187695,
+            3.0008765375015614
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "natural",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            24.000000000000004,
+            19
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            85,
+            4.999999999999998
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            52,
+            3.999999999999999
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            48.00000000000001,
+            3.9999999999999996
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            72.5,
+            32.5
+          ],
+          "gap": 109.60155108391487,
+          "path": "between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2.9999999999999982,
+            4.9999999999999964
+          ],
+          "gap": 0,
+          "path": "between",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "far",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "whenFar/fg/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            24.000000000000004,
+            19
+          ],
+          "gap": 0,
+          "path": "whenFar/fg/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            85,
+            5
+          ],
+          "gap": 0,
+          "path": "whenFar/fg/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            52,
+            4
+          ],
+          "gap": 0,
+          "path": "whenFar/fg/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            48,
+            4
+          ],
+          "gap": 0,
+          "path": "whenFar/fg/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            -50,
+            -50
+          ],
+          "preview": [
+            -48,
+            -47
+          ],
+          "gap": 252.6915115313532,
+          "path": "whenFar/bg/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            3.0000000000000027,
+            5
+          ],
+          "gap": 0,
+          "path": "whenFar/fg/between",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "snap",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            24.000000000000004,
+            19
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            52,
+            4
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            48,
+            4
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            72.5,
+            32.5
+          ],
+          "gap": 109.60155108391487,
+          "path": "withSnapRadius/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/between",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "snapChain",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/snapped/between",
+          "chain": true
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            24.000000000000004,
+            19
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/unsnapped/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/snapped/between",
+          "chain": true
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            52,
+            4
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/unsnapped/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            48,
+            4
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/unsnapped/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            72.5,
+            32.5
+          ],
+          "gap": 109.60155108391487,
+          "path": "withSnapRadius/unsnapped/between",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "withSnapRadius/snapped/between",
+          "chain": true
+        }
+      ]
+    },
+    {
+      "name": "floating",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "withFloating/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            24,
+            19
+          ],
+          "gap": 27.202941017470888,
+          "path": "withFloating/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            85,
+            5
+          ],
+          "gap": 17.11724276862369,
+          "path": "withFloating/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            52,
+            4
+          ],
+          "gap": 50.00999900019995,
+          "path": "withFloating/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            48,
+            4
+          ],
+          "gap": 46.01086828130937,
+          "path": "withFloating/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            150,
+            110
+          ],
+          "gap": 117.2731853408954,
+          "path": "withFloating/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            3,
+            5
+          ],
+          "gap": 2.23606797749979,
+          "path": "withFloating/closest/0/fixed",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "tether",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "withFloating/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            18.17472168606377,
+            14.763433953500924
+          ],
+          "gap": 27.202941017470888,
+          "path": "withFloating/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            85,
+            5
+          ],
+          "gap": 17.11724276862369,
+          "path": "withFloating/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            21.99600119960014,
+            3.399920023992003
+          ],
+          "gap": 50.00999900019995,
+          "path": "withFloating/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            21.995275776478323,
+            3.4346799081843113
+          ],
+          "gap": 46.01086828130937,
+          "path": "withFloating/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            110.18601453699262,
+            21.247990738712723
+          ],
+          "gap": 117.2731853408954,
+          "path": "withFloating/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            3,
+            5
+          ],
+          "gap": 2.23606797749979,
+          "path": "withFloating/closest/0/fixed",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "during",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            10
+          ],
+          "preview": [
+            2,
+            13
+          ],
+          "gap": 10,
+          "path": "during/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            10
+          ],
+          "preview": [
+            2,
+            13
+          ],
+          "gap": 22.80350850198276,
+          "path": "during/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            10
+          ],
+          "preview": [
+            102,
+            13
+          ],
+          "gap": 18.788294228055936,
+          "path": "during/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            10
+          ],
+          "preview": [
+            2,
+            13
+          ],
+          "gap": 50.80354318352215,
+          "path": "during/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            10
+          ],
+          "preview": [
+            2,
+            13
+          ],
+          "gap": 46.87216658103186,
+          "path": "during/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            10
+          ],
+          "preview": [
+            102,
+            13
+          ],
+          "gap": 108.22661410207749,
+          "path": "during/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            10
+          ],
+          "preview": [
+            2,
+            13
+          ],
+          "gap": 8.06225774829855,
+          "path": "during/closest/0/fixed",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "onDrop",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            10
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "onDrop/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            10
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 27.202941017470888,
+          "path": "onDrop/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            10
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 17.11724276862369,
+          "path": "onDrop/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            10
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 50.00999900019995,
+          "path": "onDrop/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            10
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 46.01086828130937,
+          "path": "onDrop/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            10
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 117.2731853408954,
+          "path": "onDrop/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            10
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 2.23606797749979,
+          "path": "onDrop/closest/0/fixed",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "gap",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "changeGap/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 13.601470508735444,
+          "path": "changeGap/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 8.558621384311845,
+          "path": "changeGap/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 25.004999500099974,
+          "path": "changeGap/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 23.005434140654685,
+          "path": "changeGap/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 58.6365926704477,
+          "path": "changeGap/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 1.118033988749895,
+          "path": "changeGap/closest/0/fixed",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "frame",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 20.615528128088304,
+          "path": "changeFrame/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 43.41658669218482,
+          "path": "changeFrame/closest/0/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 4.242640687119286,
+          "path": "changeFrame/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 30.26549190084311,
+          "path": "changeFrame/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 34.23448553724738,
+          "path": "changeFrame/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 122.58874336577564,
+          "path": "changeFrame/closest/1/fixed",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 21.213203435596427,
+          "path": "changeFrame/closest/0/fixed",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "chain",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 0,
+          "path": "withChaining/closest/0/fixed",
+          "chain": true
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 27.202941017470888,
+          "path": "withChaining/closest/0/fixed",
+          "chain": true
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 17.11724276862369,
+          "path": "withChaining/closest/1/fixed",
+          "chain": true
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 50.00999900019995,
+          "path": "withChaining/closest/0/fixed",
+          "chain": true
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 46.01086828130937,
+          "path": "withChaining/closest/0/fixed",
+          "chain": true
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            100,
+            0
+          ],
+          "preview": [
+            102,
+            3
+          ],
+          "gap": 117.2731853408954,
+          "path": "withChaining/closest/1/fixed",
+          "chain": true
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0,
+            0
+          ],
+          "preview": [
+            2,
+            3
+          ],
+          "gap": 2.23606797749979,
+          "path": "withChaining/closest/0/fixed",
+          "chain": true
+        }
+      ]
+    },
+    {
+      "name": "vary",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0.001100000000000121,
+            0
+          ],
+          "preview": [
+            2.0011,
+            3
+          ],
+          "gap": 0.001100000000000101,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            21.99882932464893,
+            0
+          ],
+          "preview": [
+            23.99882932464893,
+            3
+          ],
+          "gap": 16.000000042827523,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            82.99825050092447,
+            0
+          ],
+          "preview": [
+            84.99825050092447,
+            3
+          ],
+          "gap": 2.0000007651866074,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            50.00197098270633,
+            0
+          ],
+          "preview": [
+            52.00197098270633,
+            3
+          ],
+          "gap": 1.0000019423845279,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            45.99881749463091,
+            0
+          ],
+          "preview": [
+            47.99881749463091,
+            3
+          ],
+          "gap": 1.0000006991592296,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            147.99878697348746,
+            0
+          ],
+          "preview": [
+            149.99878697348746,
+            3
+          ],
+          "gap": 107.00000000687587,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            1.000854461577414,
+            0
+          ],
+          "preview": [
+            3.000854461577414,
+            3
+          ],
+          "gap": 2.0000001825261386,
+          "path": "vary",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "constrained",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0.001100000000000121,
+            0
+          ],
+          "preview": [
+            2.0011,
+            3
+          ],
+          "gap": 0.001100000000000101,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            21.99882932464893,
+            0
+          ],
+          "preview": [
+            23.99882932464893,
+            3
+          ],
+          "gap": 16.000000042827523,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            80,
+            0
+          ],
+          "preview": [
+            82,
+            3
+          ],
+          "gap": 3.6055512754639896,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            50.00082660530864,
+            0
+          ],
+          "preview": [
+            52.00082660530864,
+            3
+          ],
+          "gap": 1.0000003416381098,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            45.99875028077574,
+            0
+          ],
+          "preview": [
+            47.99875028077574,
+            3
+          ],
+          "gap": 1.0000007808987648,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            80,
+            0
+          ],
+          "preview": [
+            82,
+            3
+          ],
+          "gap": 126.77933585565115,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            1.0008042109202815,
+            0
+          ],
+          "preview": [
+            3.0008042109202817,
+            3
+          ],
+          "gap": 2.0000001616887944,
+          "path": "vary",
+          "chain": false
+        }
+      ]
+    },
+    {
+      "name": "coupled",
+      "frames": [
+        {
+          "pointer": [
+            2,
+            3
+          ],
+          "drop": [
+            0.0010000000000005545,
+            0
+          ],
+          "preview": [
+            2.0010000000000003,
+            3
+          ],
+          "gap": 0.001000000000000334,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            24,
+            19
+          ],
+          "drop": [
+            21.99895154474318,
+            16.000197752023404
+          ],
+          "preview": [
+            23.99895154474318,
+            19.000197752023404
+          ],
+          "gap": 0.0010669415580606381,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            85,
+            5
+          ],
+          "drop": [
+            79.99999999999999,
+            3.5527136787961586e-15
+          ],
+          "preview": [
+            81.99999999999999,
+            3.0000000000000036
+          ],
+          "gap": 3.605551275463999,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            52,
+            4
+          ],
+          "drop": [
+            49.99982490645534,
+            1.0005255424209647
+          ],
+          "preview": [
+            51.99982490645534,
+            4.000525542420965
+          ],
+          "gap": 0.000553942763844637,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            48,
+            4
+          ],
+          "drop": [
+            46.000216264820025,
+            0.99962321354777
+          ],
+          "preview": [
+            48.000216264820025,
+            3.99962321354777
+          ],
+          "gap": 0.0004344404481224492,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            150,
+            110
+          ],
+          "drop": [
+            60.50096708001544,
+            19.499032919984547
+          ],
+          "preview": [
+            62.50096708001544,
+            22.499032919984547
+          ],
+          "gap": 123.74368671520374,
+          "path": "vary",
+          "chain": false
+        },
+        {
+          "pointer": [
+            3,
+            5
+          ],
+          "drop": [
+            0.9995130951104128,
+            2.0005905093854586
+          ],
+          "preview": [
+            2.9995130951104128,
+            5.000590509385459
+          ],
+          "gap": 0.0007653611603806095,
+          "path": "vary",
+          "chain": false
+        }
+      ]
+    }
+  ],
+  "easing": [
+    {
+      "t": 0,
+      "cubic": 0,
+      "elastic": 0
+    },
+    {
+      "t": 0.05,
+      "cubic": 0.1426250000000001,
+      "elastic": 0.6465897634726175
+    },
+    {
+      "t": 0.1,
+      "cubic": 0.2709999999999999,
+      "elastic": 1.2497556207233627
+    },
+    {
+      "t": 0.2,
+      "cubic": 0.4879999999999999,
+      "elastic": 1.1246334310850439
+    },
+    {
+      "t": 0.35,
+      "cubic": 0.7253749999999999,
+      "elastic": 0.9562513841681926
+    },
+    {
+      "t": 0.5,
+      "cubic": 0.875,
+      "elastic": 1.0151515151515151
+    },
+    {
+      "t": 0.75,
+      "cubic": 0.984375,
+      "elastic": 1.0045521546915859
+    },
+    {
+      "t": 0.95,
+      "cubic": 0.999875,
+      "elastic": 0.9997975495785077
+    },
+    {
+      "t": 1,
+      "cubic": 1,
+      "elastic": 1
+    }
+  ]
+}

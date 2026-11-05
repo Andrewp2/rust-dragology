@@ -1,0 +1,9 @@
+[package]
+name = "dragology-scene"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/Andrewp2/rust-dragology"
+
+[dependencies]
+dragology = { path = "../.." }

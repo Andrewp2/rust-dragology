@@ -1,0 +1,17 @@
+# Drag-spec designer port report
+
+The implementation in [designer.rs](../../examples/gallery/src/designer.rs) follows [`src/demos/drag-spec-designer.tsx`](https://github.com/declarative-dragging/dragology/blob/b145bdd56530f7cfa9a61bf6a7170459d2f140e1/src/demos/drag-spec-designer.tsx) at commit `b145bdd56530f7cfa9a61bf6a7170459d2f140e1`.
+
+The scene preserves the source's 600 × 400 canvas, 52-unit toolbar, palette positions, six block styles, colors, font weights, and baselines. Palette diamonds measure 20 units and canvas diamonds 28 units. Normal blocks are 44 units high; snap blocks are 66 units high. Widths and child positions follow the source formulas. Block paths retain the source's circular arcs, 14-unit V notches, 10-unit rounded rectangular notches, and square-topped permanent active slot. Between and closest blocks retain the source's six fixed or collapsed notch slots, even when an expression has more children.
+
+The active specification starts at (0, 52). The preview panel is 160 × 140 at (430, 62), with the original A/B/C positions, 12-unit points, quarter-opacity targets, labels, and white active-point stroke. The 32 × 32 trash target keeps the dashed border and trash glyph. Grab cursors and horizontal radius-slider cursors follow the source.
+
+Dragging a palette item creates a permanent node at stored coordinates (0, 0) and immediately follows it, matching `switchToStateAndFollow`. Typed attachments, automatic fixed adapters, unary edge splicing, floating, the 40-unit free-mode threshold, whole-subtree deletion, and the 0–30 radius slider use the real drag engine. Attachment alternatives have distinct node identities. Direct attachment branches precede splice branches, preserving source choice order. Dragged subtrees and sliders retain their layer order.
+
+Detaching a node copies its parent's stored coordinates, as the source specifies. Compiled between children preserve declaration order and duplicate states. Repeated identical target states therefore produce the same class of coincident-target error as upstream `betweenMakeDelaunay`.
+
+All **seven designer tests pass**. They exercise barycentric preview and commit, floating/snap composition, slider bounds, typed adapters, cycle exclusion, splicing, stored-coordinate detachment, whole-subtree deletion, palette cloning, construction of an active specification through pointer events, and duplicate-target errors. The slider test measures boundary error below 0.01 canvas units because the source optimizer returns an approximate final iterate. Production code does not clamp that result.
+
+The shared optimizer directly translates the pinned JSXGraph/jcobyla solver. Its reference checks match 18 solves and 580 callback evaluations exactly. Source arc geometry and retained identity are covered by implementation and gesture tests; these checks do not establish browser-identical font, emoji, or path rasterization.
+
+The remaining adaptations are explicit. Node IDs are deterministic integers rather than random strings, while remaining stable across gestures. Cyclic attachment candidates are excluded before geometry evaluation; the source generates those candidates, but they have no renderable grabbed node. Coincident-target errors appear in the native status surface rather than a JSX diagnostic panel. Native typography, emoji, rounded-edge hit behavior, and deeply nested dragged layers still need direct visual comparison for this demo. No browser pixel-diff comparison is claimed.

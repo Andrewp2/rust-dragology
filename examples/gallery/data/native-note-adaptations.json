@@ -1,0 +1,32 @@
+{
+  "study-timeline-embed": {
+    "intro": "An approach to the \"Timeline\" study task using embedded block renderers and drag specifications within a parent timeline. The upstream version demonstrates its experimental `embed()` operator; this port uses reusable block helpers and Rust `substate` lifting."
+  },
+  "controlled": {
+    "intro": "A few simple tests of using a draggable as a *controlled component* — its parent ultimately controls its state. The two columns compare updates on drop with updates throughout dragging."
+  },
+  "component-elements": {
+    "intro": "Each card holds a component with its own counter, editable note and mount time, plus an accent color supplied from outside the draggable. The components stay mounted so their local state survives dragging and reordering.\n\nPointer events in the widget bubble to the card’s drag handler, so you can drag a card by its widget. The button and input stop propagation so they work as controls instead."
+  },
+  "component-elements-lerp": {
+    "intro": "Both charts use the same component with independent local state: click a bar to select it. Drag the knob. Mid-drag, the left chart’s data and color are blended, corresponding to the upstream `dragologyLerpProps` annotation. The right chart isn’t blended: it shows the nearest preset. On drop, the knob and the left chart’s bars overshoot and settle."
+  },
+  "with-pointer-delay": {
+    "intro": "`pointerDelay` lags the pointer before feeding it to the wrapped spec. This port schedules delayed samples in the native host. Release preserves the last delayed position: the behavior cannot continue after drop. The upstream custom-modifier example additionally supplies a debug tree view and an overlay of buffered pointer positions; those debug views are not yet present here."
+  },
+  "change-frame": {
+    "intro": "`spec.changeFrame` changes the frame a spec is given. Here a `d.vary` moving a point around a circle is given the pointer flipped upside down, so the point follows the cursor’s reflection. The source debug Overlay also shows the flipped pointer that `vary` measures its gap to; that overlay is not yet present in this port."
+  },
+  "multi-circle-points-vanilla": {
+    "intro": "From-scratch Rust reimplementation of multi-circle-points, **without using Dragology**."
+  },
+  "lists-in-lists-vanilla": {
+    "intros": [
+      "Native port of the source’s imperative lists-in-lists comparison. It keeps the layout fixed during dragging and shows the floating item with an insertion indicator.",
+      "Differences from the library version:\n\n- The library shows the item snapping between candidate positions (via floating + closest); the vanilla version shows it floating at the pointer with a drop indicator.\n- No spring animations on drop.\n- No smooth transition between ‘insert into existing row’ and ‘create new row’ modes."
+    ]
+  },
+  "layout-editor": {
+    "intro": "A layout editor for a CSS-like flex/grid model. The layout engine is the render function, so every edit reflows the whole tree. Drag a colored leaf or a dashed box to move it between containers or reorder it. Drag a leaf's corner to resize it. Each box has handles: the circled arrow on its edge switches direction (right edge = row, bottom = column, corner = grid); the small tick in the first gap adjusts the gap; the corner bracket adjusts padding; grids have a dot after the first row to change the column count. Alongside are the generated HTML and CSS and a native preview of this flex/grid subset. The upstream version renders that preview in the browser."
+  }
+}

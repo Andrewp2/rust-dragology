@@ -1,0 +1,1244 @@
+[
+  {
+    "label": "glucose–insulin",
+    "model": {
+      "stocks": {
+        "G": {
+          "name": "Plasma glucose",
+          "symbol": "x",
+          "unit": "mg/mL",
+          "x": 175,
+          "y": 100,
+          "color": "#ea580c",
+          "init": "p10",
+          "volume": "p8",
+          "scale": [
+            0,
+            2
+          ]
+        },
+        "I": {
+          "name": "Plasma insulin",
+          "symbol": "y",
+          "unit": "mU/mL",
+          "x": 175,
+          "y": 250,
+          "color": "#2563eb",
+          "init": "p11",
+          "volume": "p9",
+          "scale": [
+            0,
+            0.1
+          ]
+        }
+      },
+      "flows": {
+        "input": {
+          "name": "glucose input",
+          "from": {
+            "x": 40,
+            "y": 100
+          },
+          "to": "G",
+          "rate": "p0"
+        },
+        "renal": {
+          "name": "renal loss",
+          "from": "G",
+          "to": {
+            "x": 420,
+            "y": 22
+          },
+          "rate": "p3"
+        },
+        "indep": {
+          "name": "insulin-indep. uptake",
+          "from": "G",
+          "to": {
+            "x": 420,
+            "y": 100
+          },
+          "rate": "p1"
+        },
+        "dep": {
+          "name": "insulin-dep. uptake",
+          "from": "G",
+          "to": {
+            "x": 420,
+            "y": 178
+          },
+          "rate": "p2"
+        },
+        "prod": {
+          "name": "insulin production",
+          "from": {
+            "x": 40,
+            "y": 250
+          },
+          "to": "I",
+          "rate": "p5"
+        },
+        "destr": {
+          "name": "insulin destruction",
+          "from": "I",
+          "to": {
+            "x": 420,
+            "y": 250
+          },
+          "rate": "p7"
+        }
+      },
+      "links": {
+        "l0": {
+          "from": "G",
+          "to": "renal",
+          "shape": "threshold",
+          "params": [
+            "p4"
+          ]
+        },
+        "l1": {
+          "from": "G",
+          "to": "indep",
+          "shape": "linear",
+          "params": []
+        },
+        "l2": {
+          "from": "G",
+          "to": "dep",
+          "shape": "linear",
+          "params": []
+        },
+        "l3": {
+          "from": "I",
+          "to": "dep",
+          "shape": "linear",
+          "params": []
+        },
+        "l4": {
+          "from": "G",
+          "to": "prod",
+          "shape": "threshold",
+          "params": [
+            "p6"
+          ]
+        },
+        "l5": {
+          "from": "I",
+          "to": "destr",
+          "shape": "linear",
+          "params": []
+        }
+      },
+      "params": {
+        "p0": {
+          "label": "Q_L",
+          "value": 8400,
+          "min": 0,
+          "max": 20000
+        },
+        "p1": {
+          "label": "λ",
+          "value": 2470,
+          "min": 0,
+          "max": 6000
+        },
+        "p2": {
+          "label": "ν",
+          "value": 139000,
+          "min": 0,
+          "max": 300000
+        },
+        "p3": {
+          "label": "μ",
+          "value": 7200,
+          "min": 0,
+          "max": 15000
+        },
+        "p4": {
+          "label": "θ",
+          "value": 2.5,
+          "min": 0,
+          "max": 5
+        },
+        "p5": {
+          "label": "β",
+          "value": 1430,
+          "min": 0,
+          "max": 3000
+        },
+        "p6": {
+          "label": "φ",
+          "value": 0.51,
+          "min": 0,
+          "max": 1.5
+        },
+        "p7": {
+          "label": "α",
+          "value": 7600,
+          "min": 0,
+          "max": 15000
+        },
+        "p8": {
+          "label": "C_G",
+          "value": 15000,
+          "min": 1000,
+          "max": 30000
+        },
+        "p9": {
+          "label": "C_I",
+          "value": 15000,
+          "min": 1000,
+          "max": 30000
+        },
+        "p10": {
+          "label": "x_0",
+          "value": 1.5,
+          "min": 0,
+          "max": 4
+        },
+        "p11": {
+          "label": "y_0",
+          "value": 0.02,
+          "min": 0,
+          "max": 0.3
+        }
+      },
+      "T": 12,
+      "Trange": [
+        1,
+        72
+      ],
+      "timeUnit": "h",
+      "cursor": 1,
+      "sweep": null
+    }
+  },
+  {
+    "label": "Lotka–Volterra",
+    "model": {
+      "stocks": {
+        "prey": {
+          "name": "Hares",
+          "symbol": "x",
+          "x": 215,
+          "y": 95,
+          "color": "#ea580c",
+          "init": "p4",
+          "scale": [
+            0,
+            50
+          ]
+        },
+        "pred": {
+          "name": "Lynx",
+          "symbol": "y",
+          "x": 215,
+          "y": 235,
+          "color": "#2563eb",
+          "init": "p5",
+          "scale": [
+            0,
+            25
+          ]
+        }
+      },
+      "flows": {
+        "births": {
+          "name": "hare births",
+          "from": {
+            "x": 70,
+            "y": 95
+          },
+          "to": "prey",
+          "rate": "p0"
+        },
+        "eaten": {
+          "name": "predation",
+          "from": "prey",
+          "to": {
+            "x": 400,
+            "y": 95
+          },
+          "rate": "p1"
+        },
+        "pbirths": {
+          "name": "lynx births",
+          "from": {
+            "x": 70,
+            "y": 235
+          },
+          "to": "pred",
+          "rate": "p2"
+        },
+        "pdeaths": {
+          "name": "lynx deaths",
+          "from": "pred",
+          "to": {
+            "x": 400,
+            "y": 235
+          },
+          "rate": "p3"
+        }
+      },
+      "links": {
+        "l0": {
+          "from": "prey",
+          "to": "births",
+          "shape": "linear",
+          "params": []
+        },
+        "l1": {
+          "from": "prey",
+          "to": "eaten",
+          "shape": "linear",
+          "params": []
+        },
+        "l2": {
+          "from": "pred",
+          "to": "eaten",
+          "shape": "linear",
+          "params": []
+        },
+        "l3": {
+          "from": "prey",
+          "to": "pbirths",
+          "shape": "linear",
+          "params": []
+        },
+        "l4": {
+          "from": "pred",
+          "to": "pbirths",
+          "shape": "linear",
+          "params": []
+        },
+        "l5": {
+          "from": "pred",
+          "to": "pdeaths",
+          "shape": "linear",
+          "params": []
+        }
+      },
+      "params": {
+        "p0": {
+          "label": "a",
+          "value": 1,
+          "min": 0,
+          "max": 3
+        },
+        "p1": {
+          "label": "b",
+          "value": 0.1,
+          "min": 0,
+          "max": 0.3
+        },
+        "p2": {
+          "label": "δ",
+          "value": 0.075,
+          "min": 0,
+          "max": 0.2
+        },
+        "p3": {
+          "label": "γ",
+          "value": 1.5,
+          "min": 0,
+          "max": 3
+        },
+        "p4": {
+          "label": "x_0",
+          "value": 10,
+          "min": 0,
+          "max": 40
+        },
+        "p5": {
+          "label": "y_0",
+          "value": 5,
+          "min": 0,
+          "max": 20
+        }
+      },
+      "T": 40,
+      "Trange": [
+        5,
+        200
+      ],
+      "timeUnit": "yr",
+      "cursor": 1,
+      "sweep": null
+    }
+  },
+  {
+    "label": "predator–prey (enrichment)",
+    "model": {
+      "stocks": {
+        "prey": {
+          "name": "Prey",
+          "symbol": "x",
+          "x": 215,
+          "y": 95,
+          "color": "#ea580c",
+          "init": "p6",
+          "scale": [
+            0,
+            2.5
+          ]
+        },
+        "pred": {
+          "name": "Predators",
+          "symbol": "y",
+          "x": 215,
+          "y": 235,
+          "color": "#2563eb",
+          "init": "p7",
+          "scale": [
+            0,
+            2
+          ]
+        }
+      },
+      "flows": {
+        "growth": {
+          "name": "prey growth",
+          "from": {
+            "x": 70,
+            "y": 95
+          },
+          "to": "prey",
+          "rate": "p0"
+        },
+        "eaten": {
+          "name": "predation",
+          "from": "prey",
+          "to": {
+            "x": 400,
+            "y": 95
+          },
+          "rate": "p2"
+        },
+        "pgrowth": {
+          "name": "predator growth",
+          "from": {
+            "x": 70,
+            "y": 235
+          },
+          "to": "pred",
+          "rate": "p4"
+        },
+        "pdeaths": {
+          "name": "predator deaths",
+          "from": "pred",
+          "to": {
+            "x": 400,
+            "y": 235
+          },
+          "rate": "p5"
+        }
+      },
+      "links": {
+        "l0": {
+          "from": "prey",
+          "to": "growth",
+          "shape": "linear",
+          "params": []
+        },
+        "l1": {
+          "from": "prey",
+          "to": "growth",
+          "shape": "crowding",
+          "params": [
+            "p1"
+          ]
+        },
+        "l2": {
+          "from": "prey",
+          "to": "eaten",
+          "shape": "saturating",
+          "params": [
+            "p3"
+          ]
+        },
+        "l3": {
+          "from": "pred",
+          "to": "eaten",
+          "shape": "linear",
+          "params": []
+        },
+        "l4": {
+          "from": "prey",
+          "to": "pgrowth",
+          "shape": "saturating",
+          "params": [
+            "p3"
+          ]
+        },
+        "l5": {
+          "from": "pred",
+          "to": "pgrowth",
+          "shape": "linear",
+          "params": []
+        },
+        "l6": {
+          "from": "pred",
+          "to": "pdeaths",
+          "shape": "linear",
+          "params": []
+        }
+      },
+      "params": {
+        "p0": {
+          "label": "r",
+          "value": 1,
+          "min": 0,
+          "max": 2
+        },
+        "p1": {
+          "label": "K",
+          "value": 3,
+          "min": 0,
+          "max": 6
+        },
+        "p2": {
+          "label": "a",
+          "value": 1,
+          "min": 0,
+          "max": 2
+        },
+        "p3": {
+          "label": "h",
+          "value": 1,
+          "min": 0.05,
+          "max": 3
+        },
+        "p4": {
+          "label": "e",
+          "value": 0.5,
+          "min": 0,
+          "max": 1
+        },
+        "p5": {
+          "label": "m",
+          "value": 0.2,
+          "min": 0,
+          "max": 1
+        },
+        "p6": {
+          "label": "x_0",
+          "value": 1,
+          "min": 0,
+          "max": 5
+        },
+        "p7": {
+          "label": "y_0",
+          "value": 0.5,
+          "min": 0,
+          "max": 3
+        }
+      },
+      "T": 200,
+      "Trange": [
+        20,
+        1000
+      ],
+      "timeUnit": "",
+      "cursor": 1,
+      "sweep": null
+    }
+  },
+  {
+    "label": "SIR epidemic",
+    "model": {
+      "stocks": {
+        "S": {
+          "name": "Susceptible",
+          "symbol": "S",
+          "x": 70,
+          "y": 70,
+          "color": "#ea580c",
+          "init": "p2",
+          "scale": [
+            0,
+            1
+          ]
+        },
+        "I": {
+          "name": "Infected",
+          "symbol": "I",
+          "x": 225,
+          "y": 250,
+          "color": "#2563eb",
+          "init": "p3",
+          "scale": [
+            0,
+            0.5
+          ]
+        },
+        "R": {
+          "name": "Recovered",
+          "symbol": "R",
+          "x": 380,
+          "y": 70,
+          "color": "#16a34a",
+          "init": "p4",
+          "scale": [
+            0,
+            1
+          ]
+        }
+      },
+      "flows": {
+        "infection": {
+          "name": "infection",
+          "from": "S",
+          "to": "I",
+          "rate": "p0"
+        },
+        "recovery": {
+          "name": "recovery",
+          "from": "I",
+          "to": "R",
+          "rate": "p1"
+        }
+      },
+      "links": {
+        "l0": {
+          "from": "S",
+          "to": "infection",
+          "shape": "linear",
+          "params": []
+        },
+        "l1": {
+          "from": "I",
+          "to": "infection",
+          "shape": "linear",
+          "params": []
+        },
+        "l2": {
+          "from": "I",
+          "to": "recovery",
+          "shape": "linear",
+          "params": []
+        }
+      },
+      "params": {
+        "p0": {
+          "label": "β",
+          "value": 0.3,
+          "min": 0,
+          "max": 1
+        },
+        "p1": {
+          "label": "γ",
+          "value": 0.1,
+          "min": 0,
+          "max": 0.5
+        },
+        "p2": {
+          "label": "S_0",
+          "value": 0.99,
+          "min": 0,
+          "max": 1
+        },
+        "p3": {
+          "label": "I_0",
+          "value": 0.01,
+          "min": 0,
+          "max": 0.2
+        },
+        "p4": {
+          "label": "R_0",
+          "value": 0,
+          "min": 0,
+          "max": 1
+        }
+      },
+      "T": 160,
+      "Trange": [
+        10,
+        1000
+      ],
+      "timeUnit": "days",
+      "cursor": 1,
+      "sweep": null
+    }
+  },
+  {
+    "label": "fishery",
+    "model": {
+      "stocks": {
+        "fish": {
+          "name": "Fish",
+          "symbol": "N",
+          "x": 225,
+          "y": 250,
+          "color": "#ea580c",
+          "init": "p4",
+          "scale": [
+            0,
+            100
+          ]
+        }
+      },
+      "flows": {
+        "growth": {
+          "name": "growth",
+          "from": {
+            "x": 75,
+            "y": 140
+          },
+          "to": "fish",
+          "rate": "p0"
+        },
+        "catch": {
+          "name": "catch",
+          "from": "fish",
+          "to": {
+            "x": 380,
+            "y": 140
+          },
+          "rate": "p2"
+        }
+      },
+      "links": {
+        "l0": {
+          "from": "fish",
+          "to": "growth",
+          "shape": "linear",
+          "params": []
+        },
+        "l1": {
+          "from": "fish",
+          "to": "growth",
+          "shape": "crowding",
+          "params": [
+            "p1"
+          ]
+        },
+        "l2": {
+          "from": "fish",
+          "to": "catch",
+          "shape": "saturating",
+          "params": [
+            "p3"
+          ]
+        }
+      },
+      "params": {
+        "p0": {
+          "label": "r",
+          "value": 0.5,
+          "min": 0,
+          "max": 1
+        },
+        "p1": {
+          "label": "K",
+          "value": 100,
+          "min": 0,
+          "max": 200
+        },
+        "p2": {
+          "label": "H",
+          "value": 8,
+          "min": 0,
+          "max": 20
+        },
+        "p3": {
+          "label": "c",
+          "value": 5,
+          "min": 0.1,
+          "max": 50
+        },
+        "p4": {
+          "label": "N_0",
+          "value": 80,
+          "min": 0,
+          "max": 200
+        }
+      },
+      "T": 100,
+      "Trange": [
+        10,
+        500
+      ],
+      "timeUnit": "yr",
+      "cursor": 1,
+      "sweep": null
+    }
+  },
+  {
+    "label": "toggle switch",
+    "model": {
+      "stocks": {
+        "u": {
+          "name": "Repressor U",
+          "symbol": "u",
+          "x": 215,
+          "y": 90,
+          "color": "#ea580c",
+          "init": "p4",
+          "scale": [
+            0,
+            10
+          ]
+        },
+        "v": {
+          "name": "Repressor V",
+          "symbol": "v",
+          "x": 215,
+          "y": 240,
+          "color": "#2563eb",
+          "init": "p5",
+          "scale": [
+            0,
+            2
+          ]
+        }
+      },
+      "flows": {
+        "pu": {
+          "name": "make U",
+          "from": {
+            "x": 70,
+            "y": 90
+          },
+          "to": "u",
+          "rate": "p0"
+        },
+        "du": {
+          "name": "decay",
+          "from": "u",
+          "to": {
+            "x": 380,
+            "y": 90
+          },
+          "rate": "p3"
+        },
+        "pv": {
+          "name": "make V",
+          "from": {
+            "x": 70,
+            "y": 240
+          },
+          "to": "v",
+          "rate": "p0"
+        },
+        "dv": {
+          "name": "decay",
+          "from": "v",
+          "to": {
+            "x": 380,
+            "y": 240
+          },
+          "rate": "p3"
+        }
+      },
+      "links": {
+        "l0": {
+          "from": "v",
+          "to": "pu",
+          "shape": "repression",
+          "params": [
+            "p1",
+            "p2"
+          ]
+        },
+        "l1": {
+          "from": "u",
+          "to": "du",
+          "shape": "linear",
+          "params": []
+        },
+        "l2": {
+          "from": "u",
+          "to": "pv",
+          "shape": "repression",
+          "params": [
+            "p1",
+            "p2"
+          ]
+        },
+        "l3": {
+          "from": "v",
+          "to": "dv",
+          "shape": "linear",
+          "params": []
+        }
+      },
+      "params": {
+        "p0": {
+          "label": "α",
+          "value": 10,
+          "min": 0,
+          "max": 20
+        },
+        "p1": {
+          "label": "K",
+          "value": 1,
+          "min": 0.1,
+          "max": 5
+        },
+        "p2": {
+          "label": "n",
+          "value": 2,
+          "min": 1,
+          "max": 5
+        },
+        "p3": {
+          "label": "δ",
+          "value": 1,
+          "min": 0,
+          "max": 3
+        },
+        "p4": {
+          "label": "u_0",
+          "value": 2,
+          "min": 0,
+          "max": 4
+        },
+        "p5": {
+          "label": "v_0",
+          "value": 1,
+          "min": 0,
+          "max": 4
+        }
+      },
+      "T": 20,
+      "Trange": [
+        2,
+        100
+      ],
+      "timeUnit": "",
+      "cursor": 1,
+      "sweep": null
+    }
+  },
+  {
+    "label": "repressilator",
+    "model": {
+      "stocks": {
+        "A": {
+          "name": "Repressor A",
+          "symbol": "a",
+          "x": 240,
+          "y": 60,
+          "color": "#ea580c",
+          "init": "p4",
+          "scale": [
+            0,
+            10
+          ]
+        },
+        "B": {
+          "name": "Repressor B",
+          "symbol": "b",
+          "x": 240,
+          "y": 165,
+          "color": "#2563eb",
+          "init": "p5",
+          "scale": [
+            0,
+            10
+          ]
+        },
+        "C": {
+          "name": "Repressor C",
+          "symbol": "c",
+          "x": 240,
+          "y": 270,
+          "color": "#16a34a",
+          "init": "p6",
+          "scale": [
+            0,
+            10
+          ]
+        }
+      },
+      "flows": {
+        "pA": {
+          "name": "make A",
+          "from": {
+            "x": 50,
+            "y": 60
+          },
+          "to": "A",
+          "rate": "p0"
+        },
+        "dA": {
+          "name": "decay",
+          "from": "A",
+          "to": {
+            "x": 420,
+            "y": 60
+          },
+          "rate": "p3"
+        },
+        "pB": {
+          "name": "make B",
+          "from": {
+            "x": 50,
+            "y": 165
+          },
+          "to": "B",
+          "rate": "p0"
+        },
+        "dB": {
+          "name": "decay",
+          "from": "B",
+          "to": {
+            "x": 420,
+            "y": 165
+          },
+          "rate": "p3"
+        },
+        "pC": {
+          "name": "make C",
+          "from": {
+            "x": 50,
+            "y": 270
+          },
+          "to": "C",
+          "rate": "p0"
+        },
+        "dC": {
+          "name": "decay",
+          "from": "C",
+          "to": {
+            "x": 420,
+            "y": 270
+          },
+          "rate": "p3"
+        }
+      },
+      "links": {
+        "l0": {
+          "from": "C",
+          "to": "pA",
+          "shape": "repression",
+          "params": [
+            "p1",
+            "p2"
+          ]
+        },
+        "l1": {
+          "from": "A",
+          "to": "dA",
+          "shape": "linear",
+          "params": []
+        },
+        "l2": {
+          "from": "A",
+          "to": "pB",
+          "shape": "repression",
+          "params": [
+            "p1",
+            "p2"
+          ]
+        },
+        "l3": {
+          "from": "B",
+          "to": "dB",
+          "shape": "linear",
+          "params": []
+        },
+        "l4": {
+          "from": "B",
+          "to": "pC",
+          "shape": "repression",
+          "params": [
+            "p1",
+            "p2"
+          ]
+        },
+        "l5": {
+          "from": "C",
+          "to": "dC",
+          "shape": "linear",
+          "params": []
+        }
+      },
+      "params": {
+        "p0": {
+          "label": "α",
+          "value": 10,
+          "min": 0,
+          "max": 20
+        },
+        "p1": {
+          "label": "K",
+          "value": 1,
+          "min": 0.1,
+          "max": 5
+        },
+        "p2": {
+          "label": "n",
+          "value": 3,
+          "min": 1,
+          "max": 6
+        },
+        "p3": {
+          "label": "δ",
+          "value": 1,
+          "min": 0,
+          "max": 3
+        },
+        "p4": {
+          "label": "a_0",
+          "value": 1,
+          "min": 0,
+          "max": 5
+        },
+        "p5": {
+          "label": "b_0",
+          "value": 1.5,
+          "min": 0,
+          "max": 5
+        },
+        "p6": {
+          "label": "c_0",
+          "value": 2,
+          "min": 0,
+          "max": 5
+        }
+      },
+      "T": 60,
+      "Trange": [
+        5,
+        300
+      ],
+      "timeUnit": "",
+      "cursor": 1,
+      "sweep": null
+    }
+  },
+  {
+    "label": "damped spring",
+    "model": {
+      "stocks": {
+        "x": {
+          "name": "Position",
+          "symbol": "x",
+          "unit": "m",
+          "x": 215,
+          "y": 95,
+          "color": "#ea580c",
+          "init": "p2",
+          "scale": [
+            -1,
+            1
+          ]
+        },
+        "v": {
+          "name": "Velocity",
+          "symbol": "v",
+          "unit": "m/s",
+          "x": 215,
+          "y": 235,
+          "color": "#2563eb",
+          "init": "p3",
+          "scale": [
+            -1,
+            1
+          ]
+        }
+      },
+      "flows": {
+        "motion": {
+          "name": "motion",
+          "from": {
+            "x": 70,
+            "y": 95
+          },
+          "to": "x"
+        },
+        "spring": {
+          "name": "spring force",
+          "from": "v",
+          "to": {
+            "x": 410,
+            "y": 175
+          },
+          "rate": "p0"
+        },
+        "friction": {
+          "name": "friction",
+          "from": "v",
+          "to": {
+            "x": 410,
+            "y": 290
+          },
+          "rate": "p1"
+        }
+      },
+      "links": {
+        "l0": {
+          "from": "v",
+          "to": "motion",
+          "shape": "linear",
+          "params": []
+        },
+        "l1": {
+          "from": "x",
+          "to": "spring",
+          "shape": "linear",
+          "params": []
+        },
+        "l2": {
+          "from": "v",
+          "to": "friction",
+          "shape": "linear",
+          "params": []
+        }
+      },
+      "params": {
+        "p0": {
+          "label": "k",
+          "value": 1,
+          "min": 0,
+          "max": 4
+        },
+        "p1": {
+          "label": "c",
+          "value": 0.2,
+          "min": 0,
+          "max": 2
+        },
+        "p2": {
+          "label": "x_0",
+          "value": 1,
+          "min": -2,
+          "max": 2
+        },
+        "p3": {
+          "label": "v_0",
+          "value": 0,
+          "min": -2,
+          "max": 2
+        }
+      },
+      "T": 40,
+      "Trange": [
+        5,
+        200
+      ],
+      "timeUnit": "s",
+      "cursor": 1,
+      "sweep": null
+    }
+  },
+  {
+    "label": "empty",
+    "model": {
+      "stocks": {},
+      "flows": {},
+      "links": {},
+      "params": {},
+      "T": 10,
+      "Trange": [
+        1,
+        100
+      ],
+      "timeUnit": "",
+      "cursor": 1,
+      "sweep": null
+    }
+  }
+]

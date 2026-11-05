@@ -1,0 +1,14 @@
+[package]
+name = "dragology-egui"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/Andrewp2/rust-dragology"
+
+[dependencies]
+dragology-scene = { path = "../scene" }
+egui = { version = "0.37", default-features = false }
+
+[dev-dependencies]
+hanoi = { path = "../../examples/hanoi" }
+eframe = { version = "0.37", default-features = false, features = ["default_fonts", "wgpu", "x11", "wayland"] }
