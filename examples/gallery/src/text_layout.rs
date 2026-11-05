@@ -55,6 +55,7 @@ impl Cache {
     fn new() -> Self {
         let mut fonts = usvg::fontdb::Database::new();
         fonts.load_system_fonts();
+        resolve_generic_families(&mut fonts);
         Self {
             options: usvg::Options {
                 fontdb: Arc::new(fonts),
@@ -65,6 +66,91 @@ impl Cache {
     }
 }
 thread_local! { static CACHE: RefCell<Option<Cache>> = const { RefCell::new(None) }; }
+
+fn resolve_generic_families(fonts: &mut usvg::fontdb::Database) {
+    use usvg::fontdb::{Family, Query};
+
+    // fontdb can take a fontconfig alias's first preference even when that
+    // family is absent. usvg needs a resolvable base font before glyph fallback
+    // can run; otherwise both painting and measurement silently lose the text.
+    for (generic, preferred) in [
+        (
+            Family::SansSerif,
+            &[
+                "DejaVu Sans",
+                "Liberation Sans",
+                "Noto Sans",
+                "Arial",
+                "Helvetica",
+            ][..],
+        ),
+        (
+            Family::Serif,
+            &[
+                "DejaVu Serif",
+                "Liberation Serif",
+                "Noto Serif",
+                "Times New Roman",
+                "Times",
+            ][..],
+        ),
+        (
+            Family::Monospace,
+            &[
+                "DejaVu Sans Mono",
+                "Liberation Mono",
+                "Noto Sans Mono",
+                "Consolas",
+                "Menlo",
+                "Courier New",
+            ][..],
+        ),
+    ] {
+        if fonts
+            .query(&Query {
+                families: &[generic],
+                ..Default::default()
+            })
+            .is_some()
+        {
+            continue;
+        }
+        let family = preferred
+            .iter()
+            .find(|name| {
+                fonts
+                    .query(&Query {
+                        families: &[Family::Name(name)],
+                        ..Default::default()
+                    })
+                    .is_some()
+            })
+            .map(|name| (*name).to_owned())
+            .or_else(|| {
+                // An unfamiliar installed family still beats missing text.
+                // Keep proportional and fixed-width faces distinct when both
+                // exist, with a stable choice independent of directory order.
+                let monospace = matches!(generic, Family::Monospace);
+                fonts
+                    .faces()
+                    .filter_map(|face| {
+                        face.families
+                            .first()
+                            .map(|(name, _)| (face.monospaced != monospace, name))
+                    })
+                    .min()
+                    .map(|(_, name)| name.clone())
+            });
+        if let Some(family) = family {
+            match generic {
+                Family::SansSerif => fonts.set_sans_serif_family(family),
+                Family::Serif => fonts.set_serif_family(family),
+                Family::Monospace => fonts.set_monospace_family(family),
+                _ => unreachable!(),
+            }
+        }
+    }
+}
 
 pub fn escape(text: &str) -> String {
     text.replace('&', "&amp;")
@@ -200,6 +286,83 @@ pub fn outlines(text: &str, size: f64, style: &TextStyle) -> Rc<Outlines> {
 mod tests {
     use super::*;
     use kurbo::Shape;
+    use usvg::fontdb::{Database, FaceInfo, Family, ID, Language, Query, Source};
+
+    fn add_font(fonts: &mut Database, family: &str, monospaced: bool) -> ID {
+        // Family selection only needs metadata, so it can be tested without
+        // depending on the host's fonts or changing process-wide fontconfig.
+        fonts.push_face_info(FaceInfo {
+            id: ID::dummy(),
+            source: Source::Binary(Arc::new(Vec::<u8>::new())),
+            index: 0,
+            families: vec![(family.to_owned(), Language::English_UnitedStates)],
+            post_script_name: family.to_owned(),
+            style: Default::default(),
+            weight: Default::default(),
+            stretch: Default::default(),
+            monospaced,
+        })
+    }
+
+    fn selected_font(fonts: &Database, family: Family<'_>) -> Option<ID> {
+        fonts.query(&Query {
+            families: &[family],
+            ..Default::default()
+        })
+    }
+
+    #[test]
+    fn missing_generic_aliases_use_installed_families() {
+        let mut fonts = Database::new();
+        let sans = add_font(&mut fonts, "DejaVu Sans", false);
+        let serif = add_font(&mut fonts, "DejaVu Serif", false);
+        let mono = add_font(&mut fonts, "DejaVu Sans Mono", true);
+        for family in [Family::SansSerif, Family::Serif, Family::Monospace] {
+            assert_eq!(selected_font(&fonts, family), None);
+        }
+        resolve_generic_families(&mut fonts);
+        for (family, expected) in [
+            (Family::SansSerif, sans),
+            (Family::Serif, serif),
+            (Family::Monospace, mono),
+        ] {
+            assert_eq!(selected_font(&fonts, family), Some(expected));
+        }
+    }
+
+    #[test]
+    fn installed_generic_preferences_are_preserved() {
+        let mut fonts = Database::new();
+        let preferred = add_font(&mut fonts, "User Preferred", false);
+        add_font(&mut fonts, "DejaVu Sans", false);
+        fonts.set_sans_serif_family("User Preferred");
+        fonts.set_serif_family("User Preferred");
+        fonts.set_monospace_family("User Preferred");
+        resolve_generic_families(&mut fonts);
+        for family in [Family::SansSerif, Family::Serif, Family::Monospace] {
+            assert_eq!(selected_font(&fonts, family), Some(preferred));
+        }
+    }
+
+    #[test]
+    fn generic_fallback_handles_unfamiliar_fonts_and_empty_databases() {
+        let mut fonts = Database::new();
+        resolve_generic_families(&mut fonts);
+        assert_eq!(selected_font(&fonts, Family::SansSerif), None);
+        let mono = add_font(&mut fonts, "A Custom Mono", true);
+        resolve_generic_families(&mut fonts);
+        for family in [Family::SansSerif, Family::Serif, Family::Monospace] {
+            assert_eq!(selected_font(&fonts, family), Some(mono));
+        }
+
+        let mut fonts = Database::new();
+        let mono = add_font(&mut fonts, "A Custom Mono", true);
+        let proportional = add_font(&mut fonts, "Z Custom Proportional", false);
+        resolve_generic_families(&mut fonts);
+        assert_eq!(selected_font(&fonts, Family::Monospace), Some(mono));
+        assert_eq!(selected_font(&fonts, Family::SansSerif), Some(proportional));
+        assert_eq!(selected_font(&fonts, Family::Serif), Some(proportional));
+    }
 
     fn bounds(outline: &Outlines) -> kurbo::Rect {
         outline
