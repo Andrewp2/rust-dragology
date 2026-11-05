@@ -1579,7 +1579,7 @@ checksum = "d8b14ccef22fc6f5a8f4d7d768562a182c04ce9a3b3157b91390b52ddfdf1a76"
 
 [[package]]
 name = "dragology"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "kurbo 0.13.1",
  "serde_json",
@@ -1588,7 +1588,7 @@ dependencies = [
 
 [[package]]
 name = "dragology-egui"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "dragology-scene",
  "eframe",
@@ -1598,7 +1598,7 @@ dependencies = [
 
 [[package]]
 name = "dragology-gallery"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "chrono",
  "dagre",
@@ -1616,7 +1616,7 @@ dependencies = [
 
 [[package]]
 name = "dragology-gpui"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "dragology-scene",
  "gpui",
@@ -1626,14 +1626,14 @@ dependencies = [
 
 [[package]]
 name = "dragology-scene"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "dragology",
 ]
 
 [[package]]
 name = "dragology-wgpu"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "bytemuck",
  "dragology-scene",
@@ -2945,7 +2945,7 @@ dependencies = [
 
 [[package]]
 name = "hanoi"
-version = "0.1.0-beta.1"
+version = "0.1.0-beta.2"
 dependencies = [
  "dragology",
  "dragology-scene",

@@ -2,11 +2,22 @@
 name = "dragology-gpui"
 version.workspace = true
 edition = "2024"
+rust-version.workspace = true
+description = "GPUI adapter for Dragology model-driven dragging"
 license = "MIT"
 repository = "https://github.com/Andrewp2/rust-dragology"
+readme = "README.md"
+documentation = "https://docs.rs/dragology-gpui"
+keywords = ["drag-and-drop", "interaction", "gui", "gpui"]
+categories = ["gui"]
+# Native demos use the unpublished workspace-only Hanoi helper.
+exclude = ["examples/"]
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-dragology-scene = { path = "../scene" }
+dragology-scene = { path = "../scene", version = "=0.1.0-beta.2" }
 gpui = "0.2.2"
 
 # gpui 0.2.2 pulls xattr 0.2 via zed-async-tar, which uses the Linux ENOATTR alias.

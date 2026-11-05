@@ -2,8 +2,14 @@
 name = "dragology-scene"
 version.workspace = true
 edition = "2024"
+rust-version.workspace = true
+description = "Shared scene, hit testing, and animation for Dragology renderer adapters"
 license = "MIT"
 repository = "https://github.com/Andrewp2/rust-dragology"
+readme = "README.md"
+documentation = "https://docs.rs/dragology-scene"
+keywords = ["drag-and-drop", "interaction", "gui", "declarative"]
+categories = ["gui"]
 
 [dependencies]
-dragology = { path = "../.." }
+dragology = { path = "../..", version = "=0.1.0-beta.2" }

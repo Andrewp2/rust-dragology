@@ -13,7 +13,7 @@ cargo run --release -p dragology-gallery -- --demo stock-and-flow
 cargo run -p dragology-gallery -- --list
 ```
 
-GPUI requires the platform's native development libraries; see the [Ubuntu setup](../../README.md#native-integrations). Beta 1 (`0.1.0-beta.1`) pins Rust 1.97.1 and the tested dependency graph. The native gallery has been exercised on Ubuntu 24.04, x86-64, with X11; other native platforms and Wayland sessions are outside this beta's tested scope. The [beta release policy](../../README.md#beta-release-policy) defines API changes and version pinning.
+GPUI requires the platform's native development libraries; see the [Ubuntu setup](../../README.md#native-integrations). Beta 2 (`0.1.0-beta.2`) pins Rust 1.97.1 and the tested dependency graph. The native gallery has been exercised on Ubuntu 24.04, x86-64, with X11; other native platforms and Wayland sessions are outside this beta's tested scope. The [beta release policy](../../README.md#beta-release-policy) defines API changes and version pinning.
 
 The first release build takes longer. Omitting `--release` runs unoptimized code and can add noticeable latency to geometry-heavy demos.
 

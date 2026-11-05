@@ -2,9 +2,15 @@
 name = "dragology"
 version.workspace = true
 edition = "2024"
+rust-version.workspace = true
 description = "Renderer-independent, model-driven dragging"
 license = "MIT"
 repository = "https://github.com/Andrewp2/rust-dragology"
+readme = "README.md"
+documentation = "https://docs.rs/dragology"
+keywords = ["drag-and-drop", "interaction", "gui", "declarative"]
+categories = ["gui"]
+include = ["src/**", "tests/**", "examples/reorder.rs", "README.md", "PORTING.md", "docs/porting/**", "LICENSE", "THIRD_PARTY_NOTICES.md"]
 
 [dependencies]
 kurbo = "0.13.1"
@@ -19,4 +25,5 @@ members = ["crates/*", "examples/hanoi", "examples/gallery"]
 default-members = ["."]
 
 [workspace.package]
-version = "0.1.0-beta.1"
+rust-version = "1.97.1"
+version = "0.1.0-beta.2"

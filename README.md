@@ -6,7 +6,7 @@ This is a Rust port of the model-driven operators from [Dragology](https://githu
 
 ## Status and tested platforms
 
-**Beta 1, version 0.1.0-beta.1.** Ready for application integration and feedback within the scope below. This is an independent Rust port; the original algorithms and demo designs are the work of the Dragology contributors.
+**Beta 2, version 0.1.0-beta.2.** Ready for application integration and feedback within the scope below. This is an independent Rust port; the original algorithms and demo designs are the work of the Dragology contributors.
 
 | Surface | Beta verification |
 | --- | --- |
@@ -23,6 +23,14 @@ The [CI workflow](.github/workflows/ci.yml) checks these build and test targets.
 The current operators, preview model, host boundary, and adapter APIs form the beta integration baseline. Work toward stable 0.1.0 focuses on correctness, usability, and feedback from applications. Any deliberate breaking API change requires a new beta version and migration notes in its [GitHub release](https://github.com/Andrewp2/rust-dragology/releases). Pin a release tag when integrating; `main` remains the development branch.
 
 The full source-gallery lifecycle is implemented in GPUI. The three small adapters support the documented rectangle/circle scene API. Browser debugging tools and pixel-identical browser rendering are outside the beta scope. Original Nursery and teaching experiments retain their upstream behavior and wording.
+
+## Install
+
+```sh
+cargo add dragology@=0.1.0-beta.2
+```
+
+The renderer-independent [dragology](https://crates.io/crates/dragology) crate is available on crates.io alongside [dragology-scene](https://crates.io/crates/dragology-scene), [dragology-egui](https://crates.io/crates/dragology-egui), [dragology-gpui](https://crates.io/crates/dragology-gpui), and [dragology-wgpu](https://crates.io/crates/dragology-wgpu). Use an exact version while integrating the beta. The native demos and gallery are run from the repository checkout.
 
 ## A toggle
 
@@ -90,7 +98,7 @@ The Rust API also accepts custom operators. Each frame carries its active operat
 The native gallery includes all **119 demos** from the pinned upstream list, including the **19 Nursery demos**. It covers the small drag experiments, list and tree editors, puzzles, constrained geometry, algebra, knots, string diagrams, and stock-and-flow models.
 
 ```sh
-git clone --branch v0.1.0-beta.1 https://github.com/Andrewp2/rust-dragology.git
+git clone --branch v0.1.0-beta.2 https://github.com/Andrewp2/rust-dragology.git
 cd rust-dragology
 cargo run --release -p dragology-gallery
 cargo run --release -p dragology-gallery -- --demo knot
@@ -128,7 +136,7 @@ The GPUI demo provides a draggable Linux title bar with minimize, maximize/resto
 
 ### Use an adapter in your app
 
-Add the adapter directory as a path dependency, for example `cargo add --path ../rust-dragology/crates/egui`. Each adapter re-exports the shared scene API as `scene`. Implement its `Diagram` trait with two functions:
+Add your adapter from crates.io, for example `cargo add dragology-egui@=0.1.0-beta.2` (or use `dragology-gpui` / `dragology-wgpu`). Each adapter re-exports the shared scene API as `scene`. Implement its `Diagram` trait with two functions:
 
 - `layout(&state)` returns items in paint order. Give each item a stable ID, bounds, corner radius and sRGBA fill color.
 - `drag(&state, &id)` returns a core drag specification for that item or `None` for a decoration or disabled item.
@@ -157,7 +165,7 @@ The headless example prints the candidate order and floating row position at eac
 To depend on the library directly from GitHub:
 
 ```sh
-cargo add dragology --git https://github.com/Andrewp2/rust-dragology --tag v0.1.0-beta.1
+cargo add dragology --git https://github.com/Andrewp2/rust-dragology --tag v0.1.0-beta.2
 ```
 
 To run the library checks used by CI:
@@ -175,6 +183,7 @@ After installing the Linux native dependencies, run the remaining CI checks:
 cargo test --locked -p dragology-egui -p dragology-wgpu --tests
 cargo test --locked -p dragology-gallery --lib --tests
 cargo build --locked --workspace --examples --bins
+cargo publish --dry-run --locked -p dragology -p dragology-scene -p dragology-egui -p dragology-gpui -p dragology-wgpu
 ```
 
 Adapter tests exercise egui release/cancellation and actual wgpu drawing, clipping, color, and viewport reset through software Vulkan without a window. Gallery checks include a separate startup regression for the algebra builder, so other demos cannot hide an ID collision by consuming IDs first.

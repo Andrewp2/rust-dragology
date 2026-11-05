@@ -2,11 +2,19 @@
 name = "dragology-egui"
 version.workspace = true
 edition = "2024"
+rust-version.workspace = true
+description = "egui adapter for Dragology model-driven dragging"
 license = "MIT"
 repository = "https://github.com/Andrewp2/rust-dragology"
+readme = "README.md"
+documentation = "https://docs.rs/dragology-egui"
+keywords = ["drag-and-drop", "interaction", "gui", "egui"]
+categories = ["gui"]
+# Native demos use the unpublished workspace-only Hanoi helper.
+exclude = ["examples/"]
 
 [dependencies]
-dragology-scene = { path = "../scene" }
+dragology-scene = { path = "../scene", version = "=0.1.0-beta.2" }
 egui = { version = "0.37", default-features = false }
 
 [dev-dependencies]
